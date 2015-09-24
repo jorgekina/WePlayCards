@@ -21,6 +21,7 @@ public class Driver {
 		first.printHand();
 		first.discardCard(0);
 		//first.printHand();
+		System.out.println("Hey guys new message");
 	}
 	
 	
