@@ -1,3 +1,4 @@
+//card class
 function Card (suit, value) {
 	
 	//private method: to set the suit for the card
