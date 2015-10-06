@@ -49,4 +49,9 @@ function Deck () {
 			console.log(cardList[i].toString());
 	}
 	
+	//public method: returns true if deck is empty
+	this.isEmpty = function() {
+		return size < 0;
+	}
+	
 }

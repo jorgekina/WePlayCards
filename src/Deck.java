@@ -53,4 +53,8 @@ public class Deck {
 			System.out.println(cardList[i].toString());
 	}
 	
+	public boolean isEmpty() {
+		return (size < 0);
+	}
+	
 }

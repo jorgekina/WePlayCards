@@ -13,9 +13,8 @@ public class Player {
 
 	public void printHand() {
 		for (int i = 0; i < hand.size(); i++)
-			System.out.println(hand.get(i).toString());
-		System.out.println("Hand size is " + hand.size());
-		
+			System.out.print(hand.get(i).toString() + " ");
+		System.out.println();		
 	}
 	
 	//returns null if card selection is not valid, otherwise returns a card at location pos
@@ -31,7 +30,10 @@ public class Player {
 	public void addCard(Card newOne) {
 		hand.add(newOne);
 	}
-	
+	//gets the size of the players hand
+	public int getHandSize() {
+		return hand.size();
+	}
 	//get players name
 	public String getName() {
 		return name;
