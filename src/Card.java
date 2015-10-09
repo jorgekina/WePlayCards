@@ -19,12 +19,6 @@ public class Card {
 		setSuit(x);
 		setValue(y);
 	}
-	//creates a card out of a card
-	public Card(Card obj) {
-		setSuit(obj.getSuit());
-		setValue(obj.getValue());
-
-	}
 	
 	//sets card value to v
 	private void setValue(int v) {
