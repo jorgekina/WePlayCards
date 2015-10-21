@@ -73,7 +73,7 @@
     position: fixed;
 }
 
-#poop {
+#result {
     color: yellow;
     margin-left: 15%;
     position: fixed;
@@ -170,16 +170,16 @@ a:visited { background-color:yellow; }
 
 
 <ul>
-	<li><a href=# class="myButton" style="color:white;" button onclick="startGame()">DEAL</button></a>
-	<li><a href=# class="myButton" style="color:white;" button onclick="hitMe()">HIT</button></a>
-	<li><a href=# class="myButton" style="color:white;" button onclick="stop()">STAND</button></a>
+	<li><a href=# class="myButton" style="color:white;" button onclick="startGame()"  >DEAL</button></a>
+	<li><a href=# class="myButton" style="color:white;" button id="hit" onclick="hitMe()"  >HIT</button></a>
+	<li><a href=# class="myButton" style="color:white;" button id="stand"  onclick="stop()" >STAND</button></a>
 </ul>
 
 
 <p class = "Player">Dealer</p>
 <p id ="dealerCards">  <img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"</p>
 
-<p id="poop"></p>
+<p id="result"></p>
 
 <p class = "Player">Player</p>
 <p id="playerCards"><img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"></p>
@@ -322,32 +322,36 @@ var dealCards = [];
 
 function hitMe (){
 
-	var addEle = deck2[Math.floor((Math.random() * (deck2.length-1)) + 1)] // random card draw?
-	var index = deck2.indexOf(addEle); // check index to delete from deck
-	deck2.splice(index,1 ); // delete card from deck
-	playCards.push(addEle); //add card to dealer
-	document.getElementById("playerCards").innerHTML += "<img src='images/" + playCards[playCards.length - 1].link + ".png' height = '150' width = '115' >";	// display card
-	var value = burst(playCards);
-	if (value > 21){
-        document.getElementById("poop").innerHTML = "You lose.";
-		//document.getElementById("loose").style.visibility = "visible";
-		//document.getElementById("blackjack").style.visibility = "hidden";
-		
-	}
-	else {
-		//document.getElementById("poop").innerHTML = "You win!";
-		//document.getElementById("win").style.visibility = "visible";
+	var check = document.getElementById("result").innerHTML;
+	if ((check.toString() != "You win!") && (check.toString() != "You lose.")){
+	
+		var addEle = deck2[Math.floor((Math.random() * (deck2.length-1)) + 1)]; // random card draw?
+		var index = deck2.indexOf(addEle); // check index to delete from deck
+		deck2.splice(index,1 ); // delete card from deck
+		playCards.push(addEle); //add card to dealer
+		document.getElementById("playerCards").innerHTML += "<img src='images/" + playCards[playCards.length - 1].link + ".png' height = '150' width = '115' >";	// display card
+		var value = burst(playCards);
+		if (value > 21){
+			document.getElementById("result").innerHTML = "You lose.";
+
+		}
 	}
 
 }
 function stop(){
-	dealerPlay();
+		if (document.getElementById("result").innerHTML !="You lose."){
+		if (document.getElementById("result").innerHTML !="You win!"){
+			dealerPlay();}
+	}
 }
 
 function startGame(){
 	populate();
+	document.getElementById("result").innerHTML="";
 	playCards = [];
 	dealCards = [];
+	document.getElementById("stand").disabled = false;
+	document.getElementById("hit").disabled = false;
 	document.getElementById("dealerCards").innerHTML = "";
 	document.getElementById("playerCards").innerHTML = "";
 	if (playCards.length == 0){
@@ -359,7 +363,7 @@ function startGame(){
 		index = deck2.indexOf(addEle);
 		deck2.splice(index,1);
 		dealCards.push(addEle);
-//		document.getElementById("poop").innerHTML = burst(dealCards);
+//		document.getElementById("result").innerHTML = burst(dealCards);
 		document.getElementById("dealerCards").innerHTML += "<img src='images/back.png' height='150' width = '115'>";
 		document.getElementById("dealerCards").innerHTML += "<img src='images/" + dealCards[1].link + ".png' height = '150' width = '115' >";	// display card	
 		// for (var i = 0 ; i < dealCards.length; i++){
@@ -374,7 +378,7 @@ function startGame(){
 		index = deck2.indexOf(addEle);
 		deck2.splice(index,1);
 		playCards.push(addEle);
-        document.getElementById("poop").innerHTML = "Count: " + burst(playCards);
+        document.getElementById("result").innerHTML = "Count: " + burst(playCards);
 
 				
 		for (var i = 0 ; i < playCards.length; i++){
@@ -385,7 +389,7 @@ function startGame(){
 }
 
 function burst (arr){
-//document.getElementById("poop").innerHTML = arr.length;
+//document.getElementById("result").innerHTML = arr.length;
 
 	var value = 0;
 	for (var i = 0 ; i <arr.length ; i++){
@@ -401,7 +405,7 @@ function burst (arr){
 		}
 	
 	}
-	document.getElementById("poop").innerHTML = "Count: " + value;
+	document.getElementById("result").innerHTML = "Count: " + value;
 	return (value);
 }
 
@@ -425,9 +429,9 @@ function dealerPlay(){
 	}
 	
 	if ((dealValue <=21) && (dealValue >= playValue))
-		document.getElementById("poop").innerHTML = "You lose.";
+		document.getElementById("result").innerHTML = "You lose.";
 	else
-		document.getElementById("poop").innerHTML = "You win!";
+		document.getElementById("result").innerHTML = "You win!";
 	
 
 }
