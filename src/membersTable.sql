@@ -2,7 +2,7 @@
 
 CREATE TABLE members
 (
-email VARCHAR(40) NOT NULL,
+email VARCHAR(40) NOT NULL PRIMARY KEY,
 psswrd VARCHAR(50) NOT NULL,
 points INT NOT NULL
 );
@@ -12,4 +12,4 @@ VALUES ('gaben@valvesoftware.com', 'gaben', 1337);
 
 UPDATE members
 SET email = newEmail, psswrd = newPsswrd, points = newPoints
-WHERE email = currentEmail;
+WHERE email = 'gaben@valvesoftware.com';
