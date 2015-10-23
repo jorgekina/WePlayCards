@@ -7,25 +7,24 @@ function Deck () {
 		
 		var counter = 0;
 		for (var i = 1; i < 5; i++) 
-			for (var j = 1; j < 14; j++) {
+			for (var j = 1; j < 13; j++) {
 				tempDeck[counter] = new Card(i, j);
 				counter++;
 			}
 		
 		//shuffle the cards
-		for (var i = 0; i < 52; i++) {
-			var swapLoc = Math.floor(Math.random() * 52);
+		for (var i = 0; i < 48; i++) {
+			var swapLoc = Math.floor(Math.random() * 48);
 			var temp = tempDeck[i];
 			tempDeck[i] = tempDeck[swapLoc];
 			tempDeck[swapLoc] = temp;
 		}
-		
 		return tempDeck;
 	};
 	
 	//private member variables
 	var cardList = setUpDeck();
-	var size = 51;
+	var size = 47;
 	
 	//public method: returns a card if there are any available, if not returns null
 	this.drawCard = function() {
@@ -45,7 +44,7 @@ function Deck () {
 	
 	//public method: prints the deck
 	this.printDeck = function() {
-		for (var i = 0; i < 52; i++)
+		for (var i = 0; i < size; i++)
 			console.log(cardList[i].toString());
 	}
 	

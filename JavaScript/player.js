@@ -34,4 +34,9 @@ function Player (name, cards) {
 			console.log(hand[i].toString());	 
 		console.log("Hand size is " + sizeOfDeck);
 	};
+	
+	//public method: returns the size of the players hand
+	this.getHandSize = function() {
+		return sizeOfDeck;
+	}
 }

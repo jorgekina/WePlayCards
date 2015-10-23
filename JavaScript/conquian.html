@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<img id="background" src="Images/background.jpg"
+width="100%">
+
+
+
+<p>Click the button to trigger a function that will output "Hello World" in a p element with id="demo".</p>
+
+<button onclick="myFunction()">Click me</button>
+
+<p id="demo"></p>
+
+
+<script src="card.js"></script>
+<script src="deck.js"></script>
+
+
+<script>
+//functions
+
+
+//will check if the card is valid or not
+var cardIsValid = function (testCard) {
+	if (testCard === null && typeof variable === "object" )
+		return false;
+	if (testCard.getValue() <= 9 && testCard.getValue() >= 8)
+		return false;
+	return true;
+};
+
+//accepts an array that will be checked to see if its a valid move
+var validMove = function (move) {
+	
+	if (move.length < 3)
+		return false;
+		
+	//sorting the move array using insertion sort, since move array would always be small
+	for (var i = 0; i < move.length; i++) {
+		var temp = move[i];
+		var j = i;
+		while (j > 0 && temp < move[j-1]) {
+			move[j] = move[j-1];
+			j--;
+		}
+		move[j] = temp;
+	}
+	
+	var counter = 0;
+	//check if the cards are of the same value
+	var testValue = move[0].getValue();
+	for (var i = 0; i < move.length; i++)
+		if (move[i].getValue() === testValue)
+			counter++;
+	if (counter === move.length)
+		return true;
+		
+	counter = 0;
+	var testSuit = move[0].getSuit();
+	//check if the cards are in ascending order and if the suit are the same
+	//first card is not tested
+	for (var i = 1; i < move.length; i++) {
+		//if suit are the same
+		if (move[i-1].getSuit() === move[i].getSuit()) {
+			//if the card is a 11 then the card before it was a 7
+			if (move[i-1].getValue() + 1 === move[i].getValue())
+				counter++;
+			else if (move[i].getValue() === 10)
+				if (move[i-1].getValue() === 7)
+					counter++;
+		}
+	}
+	
+	if (counter === move.length)
+		return true;
+		
+	return false;
+	
+};
+
+
+
+var playDeck = new Deck;
+
+//create the starting card for the first player
+var hand1 = new Array();
+for (var i = 0; i < 8;) {
+	var temp = playDeck.drawCard();
+	if (cardIsValid(temp)) {
+		hand1.push(temp);
+		i++;
+	}
+}
+//create the starting cards for the second player	
+var hand2 = new Array();
+for (var i = 0; i < 8;) {
+	var temp = playDeck.drawCard();
+	if (cardIsValid(temp)) {
+		hand2.push(temp);
+		i++;
+	}
+}
+
+
+function myFunction() {	
+    document.getElementById("demo").innerHTML =  "<img src=" + hand2[0].getImageSource() + " height = '150' width = '115'>";
+
+}
+
+</script>
+
+</body>
+</html>
