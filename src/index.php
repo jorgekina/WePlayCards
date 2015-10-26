@@ -2,17 +2,19 @@
 session_start();
 include_once 'dbconnect.php';
 
-if(isset($_SESSION['user'])!="")
+if(isset($_SESSION['user']) != "")
 {
  header("Location: home.php");
 }
+
 if(isset($_POST['btn-login']))
 {
  $email = mysqli_real_escape_string($connection, $_POST['email']);
  $upass = mysqli_real_escape_string($connection, $_POST['pass']);
- $res=mysqli_query($connection, "SELECT * FROM users WHERE email='$email'");
- $row=mysqli_fetch_array($res);
- if($row['password']==md5($upass))
+ $res = mysqli_query($connection, "SELECT * FROM users WHERE email='$email'");
+ $row = mysqli_fetch_array($res);
+
+ if($row['password'] == $upass)
  {
   $_SESSION['user'] = $row['user_id'];
   header("Location: home.php");
@@ -21,14 +23,14 @@ if(isset($_POST['btn-login']))
  {
   ?>
         <script>alert('wrong details');</script>
-        <?php
+  <?php
  }
  
 }
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>cleartuts - Login & Registration System</title>

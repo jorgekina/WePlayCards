@@ -1,0 +1,10 @@
+CREATE DATABASE `WPCDB` ;
+
+CREATE TABLE `WPCDB`.`users` 
+(
+`user_id` INT( 5 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`email` VARCHAR( 35 ) NOT NULL,
+`password` VARCHAR( 50 ) NOT NULL,
+`points` INT DEFAULT 0,
+UNIQUE (`email`)
+) ENGINE = MYISAM ;
