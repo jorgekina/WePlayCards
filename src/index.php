@@ -4,7 +4,7 @@ include_once 'dbconnect.php';
 
 if(isset($_SESSION['user']) != "")
 {
- header("Location: home.php");
+ header("Location: login.html");
 }
 
 if(isset($_POST['btn-login']))
@@ -17,7 +17,7 @@ if(isset($_POST['btn-login']))
  if($row['password'] == $upass)
  {
   $_SESSION['user'] = $row['user_id'];
-  header("Location: home.php");
+  header("Location: login.html");
  }
  else
  {
