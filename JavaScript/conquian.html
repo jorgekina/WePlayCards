@@ -1,30 +1,49 @@
 <!DOCTYPE html>
-<html>
-<body>
 
-<img id="background" src="Images/background.jpg"
-width="100%">
+<link rel="stylesheet" href="format.css" type="text/css" />
+<body style="background:#D0D0D0 ;">
+<div id="gameboard">
+<ul>
+	<li><a href=# class="button" style="color:white;" button onclick="endTurn()"  >Submit Move</button></a>
+	<li><a href=# class="button" style="color:white;" button id="hit" onclick="endTurn()"  >End Turn</button></a>
+</ul>
+
+<p class ="Player">Computer</p>
+<p id="computerHand"></p>
+<p id = "comp1" class="test">a</p>
+<p id = "comp2" class="test">b</p>
+<p id = "comp3" class="test">c</p>
+<p id = "comp4" class="test">d</p>
+<p id = "comp5" class="test">e</p>
+<p id = "comp6" class="test">f</p>
+<p id = "comp7" class="test">g</p>
+<p id = "comp8" class="test">h</p>
+<p id = "comp9" class="test">i</p>
+<p id="cardDrawn"></p>
+<p id = "player1" class="test">a</p>
+<p id = "player2" class="test">b</p>
+<p id = "player3" class="test">c</p>
+<p id = "player4" class="test">d</p>
+<p id = "player5" class="test">e</p>
+<p id = "player6" class="test">f</p>
+<p id = "player7" class="test">g</p>
+<p id = "player8" class="test">h</p>
+<p id = "player9" class="test">i</p>
+<p id="playerHand"></p>
+<p class="Player">Player</p>
 
 
-
-<p>Click the button to trigger a function that will output "Hello World" in a p element with id="demo".</p>
-
-<button onclick="myFunction()">Click me</button>
-
-<p id="demo"></p>
-
+</body>
 
 <script src="card.js"></script>
 <script src="deck.js"></script>
 
-
 <script>
 //functions
 
-
 //will check if the card is valid or not
 var cardIsValid = function (testCard) {
-	if (testCard === null && typeof variable === "object" )
+	if (testCard === null)
 		return false;
 	if (testCard.getValue() <= 9 && testCard.getValue() >= 8)
 		return false;
@@ -80,36 +99,103 @@ var validMove = function (move) {
 	
 };
 
+//returns a string that represents the players hand used to draw on screen
+var drawHand = function(hand) {
+	var stringRep = "";// a var representation of the players current cards
+	for (var i = 0; i < hand.length;i++) {
+		stringRep += "<img src=" + hand[i].getImageSource() + " height = '125' width = '90' draggable='true'>";
+	}
+	return stringRep;
+	
+};
+
+//returns a string that represents the players combos that will be used to draw on screen
+var drawCombos = function(combos) {
+	var stringRep =""//a var representation of the players combos
+	var spacesTaken = 0;
+	//adds the current cards
+	for (var i = 0; i < combos.length; i++)
+		for (var j = 0; j < combos[i].length; j++) {
+			stringRep += "<img src=" + combos[i][j].getImageSource() + " height = '125' width = '90'>";
+			spacesTaken++;
+		}
+	
+	//adds a placeholder for the free space
+	for (var i = 0; i < 9 - spacesTaken; i++)
+		stringRep +="<img src= Images/empty.jpeg height = '125' width = '90'>"
+	
+	return stringRep;
+};
 
 
+function endTurn() {	
+	var testValue;
+	do {
+		testValue = playDeck.drawCard();
+		if (testValue === null)
+			break;
+	} while (!cardIsValid(testValue));
+	
+	if (testValue != null)
+    	document.getElementById("cardDrawn").innerHTML =  "<img src=" + testValue.getImageSource() + " height = '125' width = '90'>";
+	else
+		console.log("you hit null");
+}
+
+function makeMove(action, whosTurn) {
+	
+	//draw a card and have a turn
+	if (action === 0) {
+		
+		var drawnCard;
+		do {
+			drawnCard = playDeck.drawCard();
+			
+		} while (!cardIsValid(drawnCard) && drawnCard != null);
+		//if card is not null that may mean the game is not over
+		if (drawnCard != null) {
+			document.getElementById("cardDrawn").innerHTML =  "<img src=" + drawnCard.getImageSource() + " height = '125' width = '90'>";
+		}
+	}
+	//have a turn without drawing a card 
+	else if (action === 1) {
+	
+	}	
+}
+
+
+
+//setting up
 var playDeck = new Deck;
 
-//create the starting card for the first player
-var hand1 = new Array();
+//create the starting card for the computer
+var compHand = new Array();
 for (var i = 0; i < 8;) {
 	var temp = playDeck.drawCard();
 	if (cardIsValid(temp)) {
-		hand1.push(temp);
+		compHand.push(temp);
 		i++;
 	}
 }
+
+
 //create the starting cards for the second player	
-var hand2 = new Array();
+var playerHand = new Array();
 for (var i = 0; i < 8;) {
 	var temp = playDeck.drawCard();
 	if (cardIsValid(temp)) {
-		hand2.push(temp);
+		playerHand.push(temp);
 		i++;
 	}
 }
+//create arrays that will hold the players combo
+var compCombo = new Array();
+var playerCombo = new Array();
 
-
-function myFunction() {	
-    document.getElementById("demo").innerHTML =  "<img src=" + hand2[0].getImageSource() + " height = '150' width = '115'>";
-
-}
-
+//draw the hand of both players here
+document.getElementById("computerHand").innerHTML = drawHand(compHand);
+document.getElementById("playerHand").innerHTML = drawHand(playerHand);
+var whosTurn = 0;
+//start the game  
+makeMove(0, whosTurn);
 </script>
-
-</body>
-</html>
