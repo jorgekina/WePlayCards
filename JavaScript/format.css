@@ -30,7 +30,7 @@ ul{
     background:-o-linear-gradient(top, #77b55a 5%, #72b352 100%);
     background:-ms-linear-gradient(top, #77b55a 5%, #72b352 100%);
     background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77b55a', endColorstr='#72b352',GradientType=0);
+	gefilter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77b55a', endColorstr='#72b352',GradientType=0);
     background-color:#77b55a;
     -moz-border-radius:15px;
     -webkit-border-radius:15px;

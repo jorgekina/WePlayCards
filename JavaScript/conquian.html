@@ -1,11 +1,14 @@
+
 <!DOCTYPE html>
 
 <link rel="stylesheet" href="format.css" type="text/css" />
 <body style="background:#D0D0D0 ;">
 <div id="gameboard">
 <ul>
-	<li><a href=# class="button" style="color:white;" button onclick="endTurn()"  >Submit Move</button></a>
+	<li id ="gameState"></li>
+	<li><a href=# class="button" style="color:white;" button onclick="submitMove()"  >Submit Move</button></a>
 	<li><a href=# class="button" style="color:white;" button id="hit" onclick="endTurn()"  >End Turn</button></a>
+	<li id ="moveUpdate"></li>
 </ul>
 
 <p class ="Player">Computer</p>
@@ -48,7 +51,7 @@ var cardIsValid = function (testCard) {
 	if (testCard.getValue() <= 9 && testCard.getValue() >= 8)
 		return false;
 	return true;
-};
+}
 
 //accepts an array that will be checked to see if its a valid move
 var validMove = function (move) {
@@ -60,7 +63,7 @@ var validMove = function (move) {
 	for (var i = 0; i < move.length; i++) {
 		var temp = move[i];
 		var j = i;
-		while (j > 0 && temp < move[j-1]) {
+		while (j > 0 && temp.getValue() < move[j-1].getValue()) {
 			move[j] = move[j-1];
 			j--;
 		}
@@ -75,8 +78,7 @@ var validMove = function (move) {
 			counter++;
 	if (counter === move.length)
 		return true;
-		
-	counter = 0;
+	counter = 1;
 	var testSuit = move[0].getSuit();
 	//check if the cards are in ascending order and if the suit are the same
 	//first card is not tested
@@ -91,13 +93,10 @@ var validMove = function (move) {
 					counter++;
 		}
 	}
-	
 	if (counter === move.length)
 		return true;
-		
 	return false;
-	
-};
+}
 
 //returns a string that represents the players hand used to draw on screen
 var drawHand = function(hand, player) {
@@ -111,50 +110,100 @@ var drawHand = function(hand, player) {
 	for (var i = 0; i < hand.length;i++)
 		stringRep += "<img id = '" + prefix + hand[i].getImageSource() + "' src=" + hand[i].getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
 	return stringRep;
-};
-
-
-//not to be used yet
-function endTurn() {	
-	
 }
 
-function turn(action, whosTurn) {
-	//whos turn = 0 is computers turn, 1 is the player
+
+//lets the user pass the turn
+function endTurn() {	
+ if (userDiscaredCard)
+ 	console.log("computer is happy");
+ else
+ 	console.log("user needs to discard a card");
+}
+
+//called when the user presses submit
+function submitMove() {
+
 	
-	//draw a card and have a turn
-	if (action === 0) {
+	if (validMove(tempComboHolder) || true) {
 		
-		var drawnCard;
-		do {
-			drawnCard = playDeck.drawCard();
-			
-		} while (!cardIsValid(drawnCard) && drawnCard != null);
-		//if card is not null that may mean the game is not over
-		if (drawnCard != null) {
-			document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
-			//checks whos turn and take turn
-			
+		//check here if there are no more cards in the players hand and the card drawn is used because they won the game
+		
+		document.getElementById("moveUpdate").innerHTML = "Valid Move!";
+		
+		//move the images to the left most empty space
+		var container;
+		var userPrefix;
+		var deckPrefix = "deck";
+		if (whosTurn) {
+			container = "player";
+			userPrefix = "x";
+		}
+		else {
+			container = "comp";
+			userPrefix = "y"
 		}
 		
+		for (var i = 0; i < tempComboHolder.length; i++) {
+			//search for an empty slot
+			var currentLoc = 1;
+			var foundCard = false;
+			while (document.getElementById(container + currentLoc).hasChildNodes()) {	
+				//if the card is found then set found card to true and break out of loop				
+				if (document.getElementById(container + currentLoc).childNodes[0].src.indexOf(tempComboHolder[i].getImageSource()) != -1) {
+					foundCard = true;
+					break;
+				}	
+				currentLoc++;
+			}
+			
+			//finds the card and sets it to not draggable since its part of a combo now
+			if (tempComboHolder[i].getImageSource() === drawnCard.getImageSource()) {
+				if (!foundCard)//if the card was not found then move it 
+					document.getElementById(container + currentLoc).appendChild(document.getElementById(deckPrefix + tempComboHolder[i].getImageSource()));
+				document.getElementById(deckPrefix + tempComboHolder[i].getImageSource()).draggable = false;
+				userDiscaredCard = false;//set to false since the user needs to discard a card now
+				
+			}
+			else {
+				if (!foundCard)//if the card was not found then move it
+					document.getElementById(container + currentLoc).appendChild(document.getElementById(userPrefix + tempComboHolder[i].getImageSource()));	
+				document.getElementById(userPrefix + tempComboHolder[i].getImageSource()).draggable = false;
+			}
+		}
+		//push the array into the players combo container
+		if (whosTurn)
+			playerCombo.push(tempComboHolder);
+		else
+			compCombo.push(tempComboHolder);
+		tempComboHolder = new Array();	
+		//since the user use the deck card they will need to discard one now	
+		if (!userDiscaredCard) {
+			document.getElementById("moveUpdate").innerHTML = "Discard a card!";
+			canDropAnyCardInDeck = true;
+		}
 	}
-	//have a turn without drawing a card 
-	else if (action === 1) {
+	else
+		document.getElementById("moveUpdate").innerHTML = "Invalid Move!";
 	
-	}	
+	
+	
+
 }
 
-//removes the card from the array and returns a new array
-function removeCard(cardArray, cardSource) {
+
+//removes the card from the tempcomboHolder and returns a new array for the players hand array
+function removeFromHand(cardArray, cardSource) {
 	var location = null;
 	//finds the location of the card that will be removed
-	for (var i =0; i < cardArray.length; i++)
-		if (cardArray[i].getImageSource() === cardSource.substring(53)) {
-			graveyard.push(cardArray[i]);//puts the card into the graveyard
+	for (var i =0; i < cardArray.length; i++) {
+		if (cardSource.indexOf(cardArray[i].getImageSource()) != -1) {
+			tempComboHolder.push(cardArray[i]);//puts the card into the comboArray
 			location = i;
 			break;
 		}
-	//if the card was found
+	}
+	//if the card was found and removed
 	if (location != null) {
 		var newArray = new Array();
 		//add the elements, skip the old one
@@ -163,27 +212,29 @@ function removeCard(cardArray, cardSource) {
 				newArray.push(cardArray[i]);
 		return newArray.slice();
 	}
-	else//return the old unmodified array
+	else {//the card was the card in the middle so pushing and returning the old array
+		tempComboHolder.push(drawnCard);
 		return cardArray;
+	}
 }
 
-//returns the card that is in the graveyard
-function addCard(cardSource) {
+//returns the card that is in the temp comboHolder
+function addToHand(cardSource) {
 	var location;
 	//finds the location of the card
-	for (var i = 0; i < graveyard.length; i++)
-		if (graveyard[i].getImageSource() === cardSource.substring(53)) {
+	for (var i = 0; i < tempComboHolder.length; i++)
+		if (cardSource.indexOf(tempComboHolder[i].getImageSource()) != -1) {
 			location = i;
 			break;
 		}
 	
 	var newArray = new Array();
 	//pushes all the elements into the new array except for the one that will be removed
-	for (var i = 0; i < graveyard.length; i++)
+	for (var i = 0; i < tempComboHolder.length; i++)
 		if (i != location)
-			newArray.push(graveyard[i]);
-	var temp = graveyard[location];
-	graveyard = newArray.slice();
+			newArray.push(tempComboHolder[i]);
+	var temp = tempComboHolder[location];
+	tempComboHolder = newArray.slice();
 	return temp;
 }
 
@@ -203,39 +254,85 @@ function allowDrop(ev) {
 function drop(ev) {
     //prevents the default dropping method
     ev.preventDefault();
-    
     //checks if the card dropped is going back to the deck
     if (ev.target.id.indexOf("deck") != -1) {
     	var data = ev.dataTransfer.getData("text");
-    	//if the card belongs to the deck then add it back
-    	if (data.indexOf("deck") != -1) {
-    		//gets the container that holds the card
+    	//if the card belongs to the deck then add it back or if the user needs to discard the card
+    	if (data.indexOf("deck") != -1 || canDropAnyCardInDeck) {
+    		//gets the container that holds the deck card
     		var temp = document.getElementById("cardDrawn");
     		//removes the old card
     		temp.removeChild(temp.childNodes[0]);
     		//appends the new card that just got dragged
     		temp.appendChild(document.getElementById(data));
-    	}
+    		//if the card is a discarded one then
+    		if (canDropAnyCardInDeck) {
+    			var tempArray = new Array();
+    			//remove the card from your own hand
+    			if (whosTurn) {
+    				for (var i = 0; i < playerHand.length; i++) {
+    					//the other cards except the one played are pushed into the new array
+    					if (!(document.getElementById(data).src.indexOf(playerHand[i].getImageSource()) != -1)) 
+    						tempArray.push(playerHand[i]);
+    					else
+    						drawnCard = playerHand[i];//set the new card
+    				}
+    				playerHand = tempArray.slice()//sets the new array that now has 1 less card
+    				//changes the id of the card now since its a deck card
+    				document.getElementById("x" + drawnCard.getImageSource()).id = "deck" + drawnCard.getImageSource();
+    				//can drop any card is set to false now since a card is discarded, and user discarded is satisfied
+    				canDropAnyCardInDeck = false;
+    				userDiscaredCard = true;
+    			} else {
+    				for (var i = 0; i < compHand.length; i++) {
+    					//the other cards except the one played are pushed into the new array
+    					if (!(document.getElementById(data).src.indexOf(compHand[i].getImageSource()) != -1)) 
+    						tempArray.push(compHand[i]);
+    					else
+    						drawnCard = compHand[i];//set the new card
+    				}
+    				compHand = tempArray.slice()//sets the new array that now has 1 less card 
+    				//changes the id of the card now since its a deck card
+    				document.getElementById("y" + drawnCard.getImageSource()).id = "deck" + drawnCard.getImageSource();
+    				//can drop any card is set to false now since a card is discarded, and user discarded is satisfied
+    				canDropAnyCardInDeck = false;
+    				userDiscaredCard = true;
+    			}			
+    		}
+    		else {
+    			//removes the card from the tempComboHolder
+    			var tempArray = new Array();
+    			for (var i = 0; i < tempComboHolder.length; i++)
+					if (tempComboHolder[i] != drawnCard)
+						tempArray.push(tempComboHolder[i]);
+				tempComboHolder = tempArray.slice();
+    		}
+    	}	
     } 
 	else if (whosTurn == 0) {
 		//checks if the place where the card will be dropped is users hand
 		if (ev.target.id.indexOf("computerHand") != -1) {
-			console.log(ev.target);
 			var data = ev.dataTransfer.getData("text");
 			//if the card is from the deck or the other persons hand then you cannot add it to the your hand
 			if (data.indexOf("deck") === -1 && data.indexOf("x") === -1) {
    				ev.target.appendChild(document.getElementById(data));
-   				compHand.push(addCard(document.getElementById(data).src));
+   				//for checking if the card came from your hand
+   				var inHandAlready = false;
+				for (var i = 0; i < compHand.length; i++)
+					if (document.getElementById(data).src.indexOf(compHand[i].getImageSource()) != - 1)
+						inHandAlready = true;
+				//dont add to the hand array since the card exist there already
+				if (!inHandAlready)
+			   		compHand.push(addToHand(document.getElementById(data).src));
    			}
 		}//checks if the place where the card will be dropped is the users combo area
 		else if (ev.target.id.indexOf("comp") != -1) {
-			console.log(ev.target);
 			var data = ev.dataTransfer.getData("text");
 			//if the card does not contain the prefix for the other player add it to your combo area
 			if (data.indexOf("x") === -1) {
    				ev.target.appendChild(document.getElementById(data));
    				//makes changes to the hand of the computer to reflect the board
-   				compHand = removeCard(compHand, document.getElementById(data).src);
+   				compHand = removeFromHand(compHand, document.getElementById(data).src);
    				//if the card is from the deck change the image of the deck
    				if (data.indexOf("deck") >= 0)
    					document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= Images/back.jpeg height = '125' width = '90' draggable='false'>";
@@ -246,21 +343,26 @@ function drop(ev) {
 	else if (whosTurn == 1) {
 		//checks if the place where the card will be dropped is users hand
 		if (ev.target.id.indexOf("playerHand") != -1) {
-			console.log(ev.target);
 			var data = ev.dataTransfer.getData("text");
 			//if the card is from the deck or the other persons hand then you cannot add it to the your hand
 			if (data.indexOf("deck") === -1 && data.indexOf("y") === -1) {
    				ev.target.appendChild(document.getElementById(data));
-   				playerHand.push(addCard(document.getElementById(data).src));
+   				//for checking if the card came from your hand
+   				var inHandAlready = false;
+				for (var i = 0; i < playerHand.length; i++)
+					if (document.getElementById(data).src.indexOf(playerHand[i].getImageSource()) != - 1)
+						inHandAlready = true;
+				//dont add to the hand array since the card exist there already
+				if (!inHandAlready)
+			   		playerHand.push(addToHand(document.getElementById(data).src));
    			}
 		}//checks if the place where the card will be dropped is the users combo area
 		else if (ev.target.id.indexOf("player") != -1) {
-			console.log(ev.target);
 			var data = ev.dataTransfer.getData("text");
 			//if the card does not contain the prefix for the other player add it to your board
 			if (data.indexOf("y") === -1) {
    				ev.target.appendChild(document.getElementById(data));
-   				playerHand = removeCard(playerHand, document.getElementBy(data).src);
+   				playerHand = removeFromHand(playerHand, document.getElementById(data).src);
    				//if the card is from the deck change the image of the deck
    				if (data.indexOf("deck") >= 0)
    					document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= Images/back.jpeg height = '125' width = '90' draggable='false'>";
@@ -301,13 +403,25 @@ for (var i = 0; i < 8;) {
 //create arrays that will hold the players combo
 var compCombo = new Array();
 var playerCombo = new Array();
+var tempComboHolder = new Array();//will hold the cards while the player is making a turn
 //draw the hand of both players here
 document.getElementById("computerHand").innerHTML = drawHand(compHand, 0);
 document.getElementById("playerHand").innerHTML = drawHand(playerHand, 1);
-var graveyard = new Array(); //this array will hold discarded cards, used mostly for putting cards back into the users hand
 
-var whosTurn = 0;
-//start the game  
-turn(0, whosTurn);
-//	document.getElementById(data).draggable = false;
+//EXCHANGE CARDS HERE CARD WILL HAPPEN HERE
+var drawnCard;
+var whosTurn = 0;//this will be equal to a random number
+if (whosTurn)
+	document.getElementById("gameState").innerHTML = "Player's Turn";
+else
+	document.getElementById("gameState").innerHTML = "Computer's Turn";
+//draws the first card
+do {
+	drawnCard = playDeck.drawCard();	
+} while (!cardIsValid(drawnCard) && drawnCard != null);	
+
+document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
+var userDiscaredCard = true;
+var canDropAnyCardInDeck = false;
+
 </script>
