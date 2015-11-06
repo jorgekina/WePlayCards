@@ -7,12 +7,11 @@ session_start();
 
 include_once 'dbconnect.php';
 $user = $_SESSION['user'];
-echo $user; // user is user_id
-$sql = "UPDATE users SET points=points+5 WHERE user_id= $user";
-mysqli_query($connection, $sql);
-
+//echo $user; // user is user_id
 
 ?>
+
+
 
 <style>
 
@@ -134,16 +133,7 @@ footer{
     width:100%;
     background: none;
     text-align: center;
-<!-- -webkit-column-count: 3;
-     -moz-column-count: 3;
-          column-count: 3;
-} -->
-}
 
-.hello{
-    background-color: none;
-    width: 100%;
-    margin: 0% 0%;
 }
 
 .Player{
@@ -170,13 +160,14 @@ a:visited { background-color:yellow; }
 
 <body style="background:#D0D0D0 ;">
 
+
 <!-- <div id="win" >
 <img src="images/win.jpg" height = "400" width = "400">
 </div>
 <div id="loose" >
 <img src="images/loose.jpg" height = "400" width = "400">
 </div> -->
-<button onclick="addPoint()">addpoints</button>
+
 <div id="blackjack">
 
 
@@ -197,6 +188,18 @@ a:visited { background-color:yellow; }
 
 </div>
 
+<div id ="quit">
+
+<button onclick="quit()">quit</button>
+<div id="subMenu" style="display:none;">
+<p>Would you like to quit</p>
+<a href="http://www.facebook.com"><button onclick="yes()">Yes</button></a>
+<button onclick="no()">No</button>
+
+</div>
+
+</div>
+
 <footer>
 We Play Card Games Inc. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="http://www.marthastewart.com">About</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -209,6 +212,25 @@ We Play Card Games Inc. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 <script>
 			
+function quit(){
+		
+document.getElementById("subMenu").style.display = "initial";
+}		
+function no(){
+
+document.getElementById("subMenu").style.display = "none";
+}
+
+function yes(){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			//document.getElementById("demo").innerHTML = xhttp.responseText;
+			}
+		}	
+		xhttp.open("GET", "subPoints.php", true);
+		xhttp.send();
+}	
 var deck2 = [];
 
 function populate(){
@@ -330,10 +352,7 @@ function populate(){
 var playCards = [];
 var dealCards = [];
 
-function addPoint(){
-	
-	document.getElementById("result").innerHTML = "You lose.";
-}
+
 function hitMe (){
 
 	var check = document.getElementById("result").innerHTML;
@@ -347,7 +366,14 @@ function hitMe (){
 		var value = burst(playCards);
 		if (value > 21){
 			document.getElementById("result").innerHTML = "You lose.";
-			
+			var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			//document.getElementById("demo").innerHTML = xhttp.responseText;
+			}
+		}	
+		xhttp.open("GET", "subPoints.php", true);
+		xhttp.send();
 
 		}
 	}
@@ -446,12 +472,31 @@ function dealerPlay(){
 	if ((dealValue <=21) && (dealValue >= playValue)){
 		document.getElementById("result").innerHTML = "You lose.";
 		
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			//document.getElementById("demo").innerHTML = xhttp.responseText;
+			}
+		}	
+		xhttp.open("GET", "subPoints.php", true);
+		xhttp.send();
+
+		
 	}
 	else{
 		document.getElementById("result").innerHTML = "You win!";
 		
-		
-	}
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			//document.getElementById("demo").innerHTML = xhttp.responseText;
+			}
+		}	
+			xhttp.open("GET", "addPoints.php", true);
+			xhttp.send();
+			
+		}
+	
 	
 
 }
