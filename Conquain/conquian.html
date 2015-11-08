@@ -1,39 +1,39 @@
-
 <!DOCTYPE html>
 
 <link rel="stylesheet" href="format.css" type="text/css" />
-<body style="background:#D0D0D0 ;">
-<div id="gameboard">
-<ul>
-	<li id ="gameState"></li>
-	<li><a href=# class="button" style="color:white;" button onclick="submitMove()"  >Submit Move</button></a>
-	<li><a href=# class="button" style="color:white;" button id="hit" onclick="endTurn()"  >End Turn</button></a>
-	<li id ="moveUpdate"></li>
-</ul>
 
-<p class ="Player">Computer</p>
-<p id="computerHand" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "comp1" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "comp2" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "comp3" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "comp4" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "comp5" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "comp6" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "comp7" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "comp8" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "comp9" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id="cardDrawn" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "player1" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "player2" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "player3" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "player4" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "player5" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "player6" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "player7" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "player8" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id = "player9" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p id="playerHand" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
-<p class="Player">Player</p>
+<body style="background:#D0D0D0 ;">
+	<div id="gameboard">
+		<ul>
+			<li id="gameState"></li>
+			<li><a href=# class="button" style="color:white;" button onclick="submitMove()">Submit Move</button></a>
+				<li><a href=# class="button" style="color:white;" button id="hit" onclick="endTurn()">End Turn</button></a>
+					<li id="moveUpdate"></li>
+		</ul>
+
+		<p class="Player">Computer</p>
+		<p id="computerHand" ondrop="drop(event)" ondragover="allowDrop(event)" width=9 0 height=1 25></p>
+		<p id="comp1" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="comp2" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="comp3" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="comp4" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="comp5" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="comp6" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="comp7" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="comp8" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="comp9" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="cardDrawn" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="player1" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="player2" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="player3" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="player4" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="player5" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="player6" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="player7" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="player8" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="player9" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p id="playerHand" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
+		<p class="Player">Player</p>
 
 
 </body>
@@ -58,7 +58,7 @@ var validMove = function (move) {
 	
 	if (move.length < 3)
 		return false;
-		
+	
 	//sorting the move array using insertion sort, since move array would always be small
 	for (var i = 0; i < move.length; i++) {
 		var temp = move[i];
@@ -115,20 +115,59 @@ var drawHand = function(hand, player) {
 
 //lets the user pass the turn
 function endTurn() {	
- if (userDiscaredCard)
- 	console.log("computer is happy");
- else
- 	console.log("user needs to discard a card");
+ 	console.log("inside end turn");
+	//checks if the user still needs to discard a card
+	if (userDiscaredCard) {
+		document.getElementById("moveUpdate").innerHTML = "";
+ 		//if not needed to draw, change user and let them look at card
+		if (action) {
+			if (whosTurn) {
+				whosTurn = 0
+				document.getElementById("gameState").innerHTML = "Computer's Turn";
+			}
+			else {
+				whosTurn = 1;
+				document.getElementById("gameState").innerHTML = "Player's Turn";
+			}
+			action = 0;
+			console.log("not drawing a card" + whosTurn);
+		}//user draws a card 
+		else {
+			do {
+				drawnCard = playDeck.drawCard();
+				if (drawnCard == null) //if the card is null that means no more cards are availble the game ends
+					console.log("The game is over nobody wins");	
+			} while (!cardIsValid(drawnCard) );	
+			document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
+			action = 1;
+			console.log("drawing a a card " + whosTurn);
+		} 
+	}
+ 	else
+ 		document.getElementById("moveUpdate").innerHTML = "Dicard card first";	
 }
 
 //called when the user presses submit
 function submitMove() {
-
 	
 	if (validMove(tempComboHolder) || true) {
-		
-		//check here if there are no more cards in the players hand and the card drawn is used because they won the game
-		
+		//checks if the users won by looking at their board
+		if (whosTurn) {
+			var counter = 0;
+			for (var i = 1; i <= 9; i++)
+				if ((document.getElementById("player" + i).hasChildNodes()))
+					counter++;
+			if (counter == 9)//change this later to a winning screen
+				console.log("The player has won!");
+		}
+		else {
+			var counter2 = 0;
+			for (var i = 1; i <= 9; i++)
+				if (document.getElementById("comp" + i).hasChildNodes())
+					counter2++;
+			if (counter2 == 9)
+				console.log("The computer has won!");
+		}
 		document.getElementById("moveUpdate").innerHTML = "Valid Move!";
 		
 		//move the images to the left most empty space
@@ -171,7 +210,7 @@ function submitMove() {
 				document.getElementById(userPrefix + tempComboHolder[i].getImageSource()).draggable = false;
 			}
 		}
-		//push the array into the players combo container
+		//push the array into the players combo container, MAY OR MAY NOT REMOVE
 		if (whosTurn)
 			playerCombo.push(tempComboHolder);
 		else
@@ -185,9 +224,6 @@ function submitMove() {
 	}
 	else
 		document.getElementById("moveUpdate").innerHTML = "Invalid Move!";
-	
-	
-	
 
 }
 
@@ -281,8 +317,10 @@ function drop(ev) {
     				//changes the id of the card now since its a deck card
     				document.getElementById("x" + drawnCard.getImageSource()).id = "deck" + drawnCard.getImageSource();
     				//can drop any card is set to false now since a card is discarded, and user discarded is satisfied
+					//and card changed is set to true;
     				canDropAnyCardInDeck = false;
     				userDiscaredCard = true;
+					action = 1;//user changed card next player gets a turn to use it
     			} else {
     				for (var i = 0; i < compHand.length; i++) {
     					//the other cards except the one played are pushed into the new array
@@ -372,56 +410,61 @@ function drop(ev) {
 	}
 }
 
+//sets up the game
+function init() {
+	
+	//fills the starting hand for the players
+	
+	for (var i = 0; i < 8;) {
+		var temp = playDeck.drawCard();
+		if (cardIsValid(temp)) {
+			compHand.push(temp);
+			i++;
+		}
+	}
+	
+	for (var i = 0; i < 8;) {
+		var temp2 = playDeck.drawCard();
+		if (cardIsValid(temp2)) {
+			playerHand.push(temp2);
+			i++;
+		}
+	}
+	
+	//draw the hand of both players here
+	document.getElementById("computerHand").innerHTML = drawHand(compHand, 0);
+	document.getElementById("playerHand").innerHTML = drawHand(playerHand, 1);	
+	/////////////////
+	//EXCHANGE CARDS HERE CARD WILL HAPPEN HERE
+	////////////////
+	if (whosTurn)
+		document.getElementById("gameState").innerHTML = "Player's Turn";
+	else
+		document.getElementById("gameState").innerHTML = "Computer's Turn";
+	//draws the first card
+	do {
+		drawnCard = playDeck.drawCard();	
+	} while (!cardIsValid(drawnCard) && drawnCard != null);	
+	document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
+}
 
 
 
-
-//setting up
+//creating variables for game
 var playDeck = new Deck;
-
-//create the starting card for the computer
-var compHand = new Array();
-for (var i = 0; i < 8;) {
-	var temp = playDeck.drawCard();
-	if (cardIsValid(temp)) {
-		compHand.push(temp);
-		i++;
-	}
-}
-
-
-//create the starting cards for the second player	
+var compHand = new Array();	
 var playerHand = new Array();
-for (var i = 0; i < 8;) {
-	var temp = playDeck.drawCard();
-	if (cardIsValid(temp)) {
-		playerHand.push(temp);
-		i++;
-	}
-}
-
-//create arrays that will hold the players combo
 var compCombo = new Array();
 var playerCombo = new Array();
 var tempComboHolder = new Array();//will hold the cards while the player is making a turn
-//draw the hand of both players here
-document.getElementById("computerHand").innerHTML = drawHand(compHand, 0);
-document.getElementById("playerHand").innerHTML = drawHand(playerHand, 1);
 
-//EXCHANGE CARDS HERE CARD WILL HAPPEN HERE
 var drawnCard;
 var whosTurn = 0;//this will be equal to a random number
-if (whosTurn)
-	document.getElementById("gameState").innerHTML = "Player's Turn";
-else
-	document.getElementById("gameState").innerHTML = "Computer's Turn";
-//draws the first card
-do {
-	drawnCard = playDeck.drawCard();	
-} while (!cardIsValid(drawnCard) && drawnCard != null);	
-
-document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
-var userDiscaredCard = true;
-var canDropAnyCardInDeck = false;
-
+var userDiscaredCard = true;//set to false if the user needs to drop the card into the deck
+var canDropAnyCardInDeck = false;//used to let the user drop a card from their hand into the deck
+var action = 1;//to specify what will happen in the next turn
+init();
+//Michael Munoz
+//verison 0.2
+//to do, create computer, exchange card, do something once the game is over
 </script>
