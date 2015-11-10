@@ -1,12 +1,6 @@
 <!doctype html>
 <head>
 <meta charset="utf-8">
-    
-<!-- Write your comments here -->
-
-<LINK REL=StyleSheet HREF="blackjack.css" TYPE="text/css">
-<LINK REL=StyleSheet HREF="main.css" TYPE="text/css">
-            
 <?php
 
 session_start();
@@ -17,41 +11,182 @@ $user = $_SESSION['user'];
 
 ?>
 
+
+
+<style>
+
+.myButton {
+    -moz-box-shadow: 3px 4px 0px 0px #3e7327;
+    -webkit-box-shadow: 3px 4px 0px 0px #3e7327;
+    box-shadow: 3px 4px 0px 0px #3e7327;
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #77b55a), color-stop(1, #72b352));
+    background:-moz-linear-gradient(top, #77b55a 5%, #72b352 100%);
+    background:-webkit-linear-gradient(top, #77b55a 5%, #72b352 100%);
+    background:-o-linear-gradient(top, #77b55a 5%, #72b352 100%);
+    background:-ms-linear-gradient(top, #77b55a 5%, #72b352 100%);
+    background:linear-gradient(to bottom, #77b55a 5%, #72b352 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77b55a', endColorstr='#72b352',GradientType=0);
+    background-color:#77b55a;
+    -moz-border-radius:15px;
+    -webkit-border-radius:15px;
+    border-radius:15px;
+    border:1px solid #4b8f29;
+    display:inline-block;
+    cursor:pointer;
+    color: white;
+    font-family:Arial;
+    font-size:17px;
+    padding:10px 25px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #5b8a3c;
+    text-align: center;
+    width: 80px;
+}
+.myButton:hover {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #72b352), color-stop(1, #77b55a));
+    background:-moz-linear-gradient(top, #72b352 5%, #77b55a 100%);
+    background:-webkit-linear-gradient(top, #72b352 5%, #77b55a 100%);
+    background:-o-linear-gradient(top, #72b352 5%, #77b55a 100%);
+    background:-ms-linear-gradient(top, #72b352 5%, #77b55a 100%);
+    background:linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#72b352', endColorstr='#77b55a',GradientType=0);
+    background-color:#72b352;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+
+
+
+#blackjack {
+    width: 100%;
+    height: 500px;
+    background-color:green;
+    margin: 0% 0%;
+    visibility:visible;
+    overflow: auto;
+}
+
+
+#loose{
+    visibility: hidden;
+    top: 290px;
+    left: 125px;
+    position: fixed;
+}
+
+#win{
+    visibility: hidden;
+    top: 290px;
+    left: 125px;
+    position: fixed;
+}
+
+#result {
+    color: yellow;
+    margin-left: 15%;
+    position: fixed;
+    top: 305px;
+    font-size: 24px;
+    font-family: Arial;
+}
+
+
+button {
+<!--    font-size: 125%;
+    width: 125px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    right: 50px;
+    top: 90px;
+    position: relative; -->
+}
+
+img{
+    margin-right:1%;
+    margin-left:1%;
+}
+
+li{
+    margin-top: 20%;
+}
+
+ul{
+    list-style-type: none;
+    float: right;
+    margin-top: 15%;
+    margin-right: 10%;
+}
+
+h1 {
+    background-color: none;
+    color: Black;
+    font-family: san-serif;
+    font-size: 30px;
+    margin: 2% 2%;
+}
+
+footer{
+    margin: 2% 0%;
+    width:100%;
+    background: none;
+    text-align: center;
+
+}
+
+.Player{
+    margin-left:2%;
+    margin-right: 90%;
+    width:8%;
+    font-size: 150%;
+    font-family: Arial;
+    border-style:none;
+    color: white;
+    //border-bottom-width:2em;
+}
+
+a { color:black; text-decoration: none; }
+a:hover {text-decoration:underline; }
+a:link {}
+a:active { color:red; }
+a:visited { background-color:yellow; }
+
+</style>
 </head>
 
-<header>
-    <a href="main.html" class="company">We Play Cards Inc.</a><BR>
-    <a href="logout.php?logout" class="signout"><img src="images/signout.png"></a>
-</header>
+<h1>We Play Cards Inc.</h1>
 
-<body>
-    <div id="blackjack">
-        <a href=# class="newButton1" button id="deal" onclick="startGame()"  ></button></a>
-        <a href=# class="newButton2" button id="hit" onclick="hitMe()"  ></button></a>
-        <a href=# class="newButton3" button id="stand"  onclick="stop()" ></button></a>
-        
-        <p class = "Player">Dealer</p>
-        <p id ="dealerCards">  <img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"</p>
-            
-            <p id="result"></p>
-            
-            <p class = "Player">Player</p>
-            <p id="playerCards"><img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"></p>
-    </div>
-</body>
+<body style="background:#D0D0D0 ;">
 
-<footer>
-    
-    <div id="fbox1">
-        WE LOVE CARDS, INC
-    </div>
 
-    <a href="https://instagram.com/officialbicyclecards/"><img class="imgIcons" src="images/instagramicon.png"></a>
-    <a href="https://www.facebook.com/bicyclecards"><img class="imgIcons" src="images/facebook.png"></a>
-    <a href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/twittericon.png" </a>
-    <a  href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/youtubeicon.png"</a>
-            
-</footer>
+<!-- <div id="win" >
+<img src="images/win.jpg" height = "400" width = "400">
+</div>
+<div id="loose" >
+<img src="images/loose.jpg" height = "400" width = "400">
+</div> -->
+
+<div id="blackjack">
+
+
+<ul>
+	<li><a href=# class="myButton" style="color:white;" button onclick="startGame()"  >DEAL</button></a>
+	<li><a href=# class="myButton" style="color:white;" button id="hit" onclick="hitMe()"  >HIT</button></a>
+	<li><a href=# class="myButton" style="color:white;" button id="stand"  onclick="stop()" >STAND</button></a>
+</ul>
+
+
+<p class = "Player">Dealer</p>
+<p id ="dealerCards">  <img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"</p>
+
+<p id="result"></p>
+
+<p class = "Player">Player</p>
+<p id="playerCards"><img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"></p>
+
+</div>
 
 <div id ="quit">
 
@@ -65,6 +200,14 @@ $user = $_SESSION['user'];
 
 </div>
 
+<footer>
+We Play Card Games Inc. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.marthastewart.com">About</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.marthastewart.com">Contact Us</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.marthastewart.com">Help</a>
+</footer>
+
+</body>
 
 
 <script>
