@@ -35,7 +35,7 @@ else if (isset($_POST['btn-changepass']))
     </div>
     <div id="right">
      <div id="content">
-         HI <?php echo $userRow['email'];?> Total Points: <?php echo $userRow['points'];?></a>&nbsp;<a href="home.php">Back to Main Menu</a>&nbsp;<a href="logout.php?logout">Sign Out</a>
+         HI <?php echo $userRow['email'];?> Total Points: <?php echo $userRow['points'];?></a>&nbsp;<a href="MainMenu.php">Back to Main Menu</a>&nbsp;<a href="logout.php?logout">Sign Out</a>
         </div>
     </div>
 </div>
