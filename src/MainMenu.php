@@ -116,14 +116,14 @@ $userRow = mysqli_fetch_array($res);
 <ul>
 <img src="blackjack.jpg" width="100" height="100" alt="Picture of blackjack">
 
-<img src="conquain.jpeg" width="100" height="100" alt="Picture of conquain">
+<img src="conquain.jpeg" width="130" height="100" alt="Picture of conquain">
 </p>
 <p>
-<!--input type="button" value="Single Player" onclick="window.location.href='blackjack.html';"/>
+<input type="button" value="Play Blackjack" onclick="window.location.href='blackjack.html';"/>
 
-<input type="button" value="Play Conquain" onclick="window.location.href='conquain.html';"/-->
-<button type="button" onclick="window.location.href='blackjack.html';">Single Player</button>
-<button type="button" onclick="window.location.href='conquian.html';">Play Conquain</button>
+<input type="button" value="Play Conquain" onclick="window.location.href='conquain.html';"/>
+<!--button type="button" onclick="window.location.href='blackjack.html';">Single Player</button>
+<button type="button" onclick="window.location.href='conquian.html';">Play Conquain</button-->
 
 
 </ul>
