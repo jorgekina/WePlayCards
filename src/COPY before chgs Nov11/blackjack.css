@@ -6,7 +6,7 @@
             background-color:green;
             margin: 0% 0%;
             padding-left: 20px;
-            padding-bottom: 40px;
+            padding-bottom: 30px;
             visibility:visible;
             overflow: auto;
         }
@@ -22,7 +22,6 @@
             left: 125px;
             position: fixed;
         }
-
         button {
             <!--    font-size: 125%;
             width: 125px;
@@ -43,16 +42,14 @@
             margin-left:2%;
             font-size: 130%;
             font-family: Arial;
-            font-weight: regular;
+            font-weight: bold;
             color: black;
-            padding-top: 20px;
-            padding-bottom: 10px;
             //border-bottom-width:2em;
         }
 
         #result {
             margin-left: 15%;
-            top: 415px;
+            top: 390px;
             font-size: 130%;
             font-family: Arial;
             color: white;

@@ -23,20 +23,27 @@ else if (isset($_POST['btn-changepass']))
 
 <!DOCTYPE html>
 <html>
+<header>
+<LINK REL=StyleSheet HREF="main.css" TYPE="text/css" MEDIA=screen>
+<a href="MainMenu.php" class="company">We Play Cards Inc.</a><BR>
+</header>
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Welcome - <?php echo $userRow['email']; ?></title>
-<link rel="stylesheet" href="style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Welcome - <?php echo $userRow['email']; ?></title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
+
 <body>
+
 <div id="header">
- <div id="left">
-    <label>cleartuts</label>
-    </div>
     <div id="right">
      <div id="content">
-         HI <?php echo $userRow['email'];?> Total Points: <?php echo $userRow['points'];?></a>&nbsp;<a href="MainMenu.php">Back to Main Menu</a>&nbsp;<a href="logout.php?logout">Sign Out</a>
-        </div>
+        <b>Hello <?php echo $userRow['email'];?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Points:<?php echo $userRow['points'];?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="MainMenu.php">Main Menu</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="logout.php?logout">Sign Out</a>
+    </div>
     </div>
 </div>
 
@@ -44,16 +51,27 @@ else if (isset($_POST['btn-changepass']))
 <div id="login-form">
 <form method="post">
 <table align="center" width="30%" border="0">
-<tr>
-<td><button type="submit" name="btn-changemail">Change E-Mail</button></td>
-</tr>
-<tr>
-<td><button type="submit" name="btn-changepass">Change Password</button></td>
-</tr>
+    <tr>
+        <td><button type="submit" name="btn-changemail">Change E-Mail</button></td>
+    </tr>
+    <tr>
+        <td><button type="submit" name="btn-changepass">Change Password</button></td>
+    </tr>
 </table>
 </form>
 </div>
 </center>
-
 </body>
+<BR><BR><BR><BR><BR><BR>
+
+<footer>
+<div id="fbox1">
+SOCIAL
+</div>
+<a href="https://instagram.com/officialbicyclecards/"><img class="imgIcons" src="images/instagramicon.png"></a>
+<a href="https://www.facebook.com/bicyclecards"><img class="imgIcons" src="images/facebook.png"></a>
+<a href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/twittericon.png" </a>
+<a  href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/youtubeicon.png"</a>
+</footer>
+
 </html>

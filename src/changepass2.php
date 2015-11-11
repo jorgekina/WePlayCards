@@ -2,21 +2,25 @@
 session_start();
 include_once 'dbconnect.php';
 
+if(!isset($_SESSION['user']))
+{
+ header("Location: changepass.php");
+}
+
 $res = mysqli_query($connection, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
 $userRow = mysqli_fetch_array($res);
 
-if (isset($_POST['btn-chmail']))
-{  
-    //used to create legal sql string
-    $newEmailAddress = mysqli_real_escape_string($connection, $_POST['newEmail']);
+if (isset($_POST['btn-chpass']))
+{   //used to create legal sql string
+    $newPassword = mysqli_real_escape_string($connection, $_POST['newPass']);
 
-    if (mysqli_query($connection, "UPDATE `WPCDB`.`users` SET email='$newEmailAddress' WHERE user_id=".$_SESSION['user']))
+    if (mysqli_query($connection, "UPDATE `WPCDB`.`users` SET password='$newPassword' WHERE user_id=".$_SESSION['user']))
     {
-        ?><script>alert('Email changed successfully.');</script><?php
+        ?><script>alert('Password changed successfully.');</script><?php
     }
     else
     {
-        ?><script>alert('Email change failed. Possible duplicate')</script><?php
+        ?><script>alert('Password change failed.')</script><?php
     }
 }
 ?>
@@ -29,8 +33,9 @@ if (isset($_POST['btn-chmail']))
     <link rel="stylesheet" href="main.css" type="text/css" />
 </head>
 
+
 <header>
-<a href="MainMenu.php" class="company">We Play Cards Inc.</a><BR>
+    <a href="MainMenu.php" class="company">We Play Cards Inc.</a><BR>
 </header>
 
 <div id="header">
@@ -47,10 +52,10 @@ if (isset($_POST['btn-chmail']))
 <form method="post">
 <table align="center" width="30%" border="0">
 <tr>
-<td><input type="text" name="newEmail" placeholder="New E-Mail" required /></td>
+<td><input type="text" name="newPass" placeholder="New Password" required /></td>
 </tr>
 <tr>
-<td><button type="submit" name="btn-chmail">Update E-Mail</button></td>
+<td><button type="submit" name="btn-chpass">Update Password</button></td>
 </tr>
 <tr>
 <td><a href="profile.php">Back to Profile</a></td>

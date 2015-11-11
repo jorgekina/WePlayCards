@@ -13,7 +13,6 @@ $userRow = mysqli_fetch_array($res);
 
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Welcome - <?php echo $userRow['email']; ?></title>
@@ -21,9 +20,12 @@ $userRow = mysqli_fetch_array($res);
 </head>
 <body>
 <div id="header">
+ <div id="left">
+    <label>cleartuts</label>
+    </div>
     <div id="right">
      <div id="content">
-         Hello&nbsp;<?php echo $userRow['email']; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="profile.php?profile">Profile</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="logout.php?logout">Sign Out</a>
+         hi' <?php echo $userRow['email']; ?>$nbsp;<a href="profile.php?profile">Profile</a>&nbsp;<a href="logout.php?logout">Sign Out</a>
         </div>
     </div>
 </div>
