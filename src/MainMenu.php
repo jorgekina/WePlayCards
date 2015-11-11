@@ -44,7 +44,7 @@ $userRow = mysqli_fetch_array($res);
         <a href="conquian.html"><img src="images/conquian2.png" class="conquianGraphic" ></a>
         <a href="blackjack.php"><img src="images/blackjack.png" class="blackjackGraphic"></a><BR>
         <submit onclick="window.location.href='conquian.html';" class="conquianButton"> <img src="images/playConquian.png"></submit>
-        <submit onclick="window.location.href='blackjack.html';" class="blackjackButton"> <img src="images/playBlackjack.png"></submit>
+        <submit onclick="window.location.href='blackjack.php';" class="blackjackButton"> <img src="images/playBlackjack.png"></submit>
 </div>
 
 </body>
