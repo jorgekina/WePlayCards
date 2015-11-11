@@ -32,6 +32,7 @@ $userRow = mysqli_fetch_array($res);
         <b class="padRight">Hello <?php echo $userRow['email'];?></b>
         <a class="padRight">Points:<?php echo $userRow['points'];?></a>
         <a href="MainMenu.php" class="padRight">Main Menu</a>
+        <a href="profile.php" class="padRight">Profile</a>
         <a href="logout.php?logout" class="padRight">Sign Out</a>
         </div>
     </div>

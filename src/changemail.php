@@ -36,7 +36,10 @@ if (isset($_POST['btn-chmail']))
 <div id="header">
     <div id="right">
         <div id="content">
+        <b class="padRight">Hello <?php echo $userRow['email'];?></b>
+        <a class="padRight">Points:<?php echo $userRow['points'];?></a>
         <a href="MainMenu.php" class="padRight">Main Menu</a>
+        <a href="logout.php?logout" class="padRight">Sign Out</a>
         </div>
     </div>
 </div>
@@ -53,7 +56,7 @@ if (isset($_POST['btn-chmail']))
 <td><button type="submit" name="btn-chmail">Update E-Mail</button></td>
 </tr>
 <tr>
-<td><a href="profile.php">Back to Profile</a></td>
+<td align="center"><a href="profile.php">Back to Profile</a></td>
 </tr>
 </table>
 </form>

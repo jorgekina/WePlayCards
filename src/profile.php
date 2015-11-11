@@ -39,10 +39,10 @@ else if (isset($_POST['btn-changepass']))
 <div id="header">
     <div id="right">
      <div id="content">
-        <b>Hello <?php echo $userRow['email'];?></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        Points:<?php echo $userRow['points'];?></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="MainMenu.php">Main Menu</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="logout.php?logout">Sign Out</a>
+        <b class="padRight">Hello <?php echo $userRow['email'];?></b>
+        <a class="padRight">Points:<?php echo $userRow['points'];?></a>
+        <a href="MainMenu.php" class="padRight">Main Menu</a>
+        <a href="logout.php?logout" class="padRight">Sign Out</a>
     </div>
     </div>
 </div>
