@@ -6,14 +6,14 @@ function Card (suit, value) {
 		if (num >= 1 && num <= 4)
 			return num;
 		console.log(num + " is not a proper suit");
-	};
+	}
 	
 	//private method: to set the value of the card
 	var setValue = function(num) {
 		if (num >= 1 && num <= 12)
 			return num;
 		console.log(num + " is not a proper value");
-	};
+	}
 	
 	//private method: to set the imageSource of the card
 	var setImage = function(suit, value) {
@@ -28,7 +28,7 @@ function Card (suit, value) {
 			imageSource += "oro";
 		imageSource += value.toString() + ".jpeg";
 		return imageSource;
-	};
+	}
 	
 	//private member variables
 	var suit = setSuit(suit);
@@ -38,30 +38,30 @@ function Card (suit, value) {
 	//public method: returns the value
 	this.getValue = function() {
 		return value;
-	};
+	}
 	
 	//public method: returns the suit
 	this.getSuit = function() {
 		return suit;
-	};
+	}
 	
 	//public method: returns the image source
 	this.getImageSource = function() {
 		return image;
-	};
+	}
 	
-	//public method: returns a string representing the card
+	//public method: returns a string representing the card useful for debugging
 	this.toString = function() {
 		var message;
 		if (suit === 1)
-			message = "Club";
+			message = "Baston";
 		else if (suit === 2)
-			message = "Cup";
+			message = "Copa";
 		else if (suit === 3)
-			message = "Sword";
+			message = "Espada";
 		else
-			message = "Gold";
+			message = "Oro";
 		message += " of " + value;
 		return message;
-	};
+	}
 }

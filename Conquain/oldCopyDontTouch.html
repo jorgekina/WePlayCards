@@ -116,23 +116,12 @@ var drawHand = function(hand, player) {
 
 //lets the user pass the turn
 function endTurn() {	
-	/*******************************************Put the losing screen at the comments below****************/
+	
 	//checks if the user still needs to discard a card
 	if (userDiscaredCard) {
 		document.getElementById("moveUpdate").innerHTML = "";
-		//check cards that dont belong on the players board and return them back to their hand
-		if (whosTurn) {
-				if (tempComboHolder.length > 0) {
-					for (var i = 0; i < tempComboHolder.length; i++)
-						playerHand.push(tempComboHolder[i]);
-					for (var i = 1; i < 9; i++)
-						if (document.getElementById("player" + i).hasChildNodes())
-							if (document.getElementById("player" + i).childNodes[0].draggable)
-								document.getElementById("playerHand").appendChild(document.getElementById("player" + i).childNodes[0]);
-					tempComboHolder = new Array();
-				}
-		}
  		//if not needed to draw, change user and let them look at card
+ 		
 		if (action) {
 			if (whosTurn) {
 				whosTurn = 0
@@ -147,7 +136,7 @@ function endTurn() {
 		else {
 			do {
 				drawnCard = playDeck.drawCard();
-				if (drawnCard == null) //if the card is null that means no more cards are availble the game ends //WHEN THIS IF TRIGGERED THE GAME IS OVER NO MORE CARDS
+				if (drawnCard == null) //if the card is null that means no more cards are availble the game ends
 					console.log("The game is over nobody wins");	
 			} while (!cardIsValid(drawnCard) );	
 			document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
@@ -160,7 +149,7 @@ function endTurn() {
 
 //called when the user presses submit
 function submitMove() {
-	/*******************************************Put the winning screen at the comments below****************/
+
 	if (validMove(tempComboHolder) || true) {
 		//checks if the users won by looking at their board
 		if (whosTurn) {
@@ -168,7 +157,7 @@ function submitMove() {
 			for (var i = 1; i <= 9; i++)
 				if ((document.getElementById("player" + i).hasChildNodes()))
 					counter++;
-			if (counter == 9)//WHEN THIS IF TRIGGERED THE PLAYER HAS WON
+			if (counter == 9)//CHANGE THIS TO A WINNING SCREEN
 				console.log("The player has won!");
 		}
 		else {
@@ -176,7 +165,7 @@ function submitMove() {
 			for (var i = 1; i <= 9; i++)
 				if (document.getElementById("comp" + i).hasChildNodes())
 					counter2++;
-			if (counter2 == 9)//WHEN THIS IF TRIGGERED THE COMPUTER HAS WON
+			if (counter2 == 9)
 				console.log("The computer has won!");
 		}
 		document.getElementById("moveUpdate").innerHTML = "Valid Move!";
@@ -221,8 +210,12 @@ function submitMove() {
 				document.getElementById(userPrefix + tempComboHolder[i].getImageSource()).draggable = false;
 			}
 		}
-
-		tempComboHolder = new Array();
+		//push the array into the players combo container, MAY OR MAY NOT REMOVE
+		if (whosTurn)
+			playerCombo.push(tempComboHolder);
+		else
+			compCombo.push(tempComboHolder);
+		tempComboHolder = new Array();	
 		//since the user use the deck card they will need to discard one now	
 		if (!userDiscaredCard) {
 			document.getElementById("moveUpdate").innerHTML = "Discard a card!";
@@ -380,7 +373,7 @@ function drop(ev) {
    				compHand = removeFromHand(compHand, document.getElementById(data).src);
    				//if the card is from the deck change the image of the deck
    				if (data.indexOf("deck") >= 0)
-   					document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= images/back.jpeg height = '125' width = '90' draggable='false'>";
+   					document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= Images/back.jpeg height = '125' width = '90' draggable='false'>";
    			}
 		}
 	}
@@ -425,15 +418,18 @@ function drop(ev) {
 										if (cardToDiscard.getImageSource() != playerHand[y].getImageSource())
 											tempArray.push(playerHand[y]);
 									playerHand = tempArray.slice();
-									
 									var compDiscard = compPlayer.discardCard();
 									//add the card to the other guys deck
 									compPlayer.addCard(cardToDiscard);	
+									//and board
+									//document.getElementById("computerHand").appendChild(document.getElementById("player" + i).childNodes[0]);
+									//now add the card to your hand
 									playerHand.push(compDiscard);
 									document.getElementById("playerHand").innerHTML = drawHand(playerHand, 1);
-									document.getElementById("computerHand").appendChild(document.getElementById("player" + i).childNodes[0]);
-									document.getElementById("computerHand").innerHTML = drawHand(compPlayer.getDeck(), 0);
-									
+									console.log(opponent.getDeck());
+									document.getElementById("computerHand").innerHTML = drawHand(opponent.getDeck(), 0);
+									//now show it on the board
+									console.log(document.getElementById("computerHand"));
 									break;
 						 		}
 						 	}
@@ -446,7 +442,7 @@ function drop(ev) {
    					playerHand = removeFromHand(playerHand, document.getElementById(data).src);
    					//if the card is from the deck change the image of the deck
    					if (data.indexOf("deck") >= 0)
-   						document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= images/back.jpeg height = '125' width = '90' draggable='false'>";
+   						document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= Images/back.jpeg height = '125' width = '90' draggable='false'>";
    				}
    			}
 		}	
@@ -474,17 +470,18 @@ function init() {
 		}
 	}
 	
-	compPlayer = new Opponent(compHand);
 	//draw the hand of both players here
-	document.getElementById("computerHand").innerHTML = drawHand(compPlayer.getDeck(), 0);
-	
+	document.getElementById("computerHand").innerHTML = drawHand(compHand, 0);
 	document.getElementById("playerHand").innerHTML = drawHand(playerHand, 1);	
+	
 
+	compPlayer = new Opponent(compHand);
+	compPlayer.discardCard();
 	//setting up for exchanging one card
 	document.getElementById("gameState").innerHTML = "Discard a card";
 	document.getElementById("moveUpdate").innerHTML = "Drop it in empty slot";
-	document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= images/back.jpeg height = '125' width = '90' draggable='false'>";
-	//************************DISABLE THE Submit Move AND End Turn BUTTON HERE*******/
+	document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= Images/back.jpeg height = '125' width = '90' draggable='false'>";
+
 }
 
 //after discarding starts up the game
@@ -494,19 +491,20 @@ function start() {
 		document.getElementById("gameState").innerHTML = "Player's Turn";
 	else
 		document.getElementById("gameState").innerHTML = "Computer's Turn";
-	document.getElementById("moveUpdate").innerHTML = "";
 	//draws the first card
 	do {
 		drawnCard = playDeck.drawCard();	
 	} while (!cardIsValid(drawnCard) && drawnCard != null);	
 	document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
-	//************************ENABLE THE Submit Move AND End Turn BUTTON HERE*******/
+	
 }
 
 //creating variables for game
 var playDeck = new Deck;
 var compHand = new Array();	
 var playerHand = new Array();
+var compCombo = new Array();
+var playerCombo = new Array();
 var tempComboHolder = new Array();//will hold the cards while the player is making a turn
 var compPlayer;//the computer player
 var drawnCard;
@@ -519,9 +517,7 @@ var action = 1;//to specify what will happen in the next turn
 var needToExchange = true;
 init();
 
+//Michael Munoz
 //verison 0.3
-//TODO LIST: 
-//Increase the size of the board
-//Make the buttons disable, then enable it
-//Make a win screen/losing screen
+//to do: create computer, exchange card, do something once the game is over
 </script>

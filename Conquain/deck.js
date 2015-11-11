@@ -20,7 +20,7 @@ function Deck () {
 			tempDeck[swapLoc] = temp;
 		}
 		return tempDeck;
-	};
+	}
 	
 	//private member variables
 	var cardList = setUpDeck();
@@ -33,14 +33,14 @@ function Deck () {
 		var temp = cardList[size];
 		size--;
 		return temp;
-	};
+	}
 	
 	//public method: returns the size of the deck
 	this.getDeckSize = function() {
 		if (size < 0)
 			return 0;
 		return size + 1;
-	};
+	}
 	
 	//public method: prints the deck
 	this.printDeck = function() {
