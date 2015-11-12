@@ -2,12 +2,12 @@
 
 <link rel="stylesheet" href="format.css" type="text/css" />
 
-<body style="background:#D0D0D0 ;">
-	<div id="gameboard">
+<body>
+	<div id="gameboard" style="background:green; height:1000px;">
 		<ul>
 			<li id="gameState"></li>
 			<li><a href=# class="button" style="color:white;" button onclick="submitMove()">Submit Move</button></a>
-			<li><a href=# class="button" style="color:white;" button id="endButton" onclick="endTurn()">End Turn</button></a>
+			<li><a href=# class="button" style="color:white;" button id="endButton" onclick="endTurn()" >End Turn</button></a>
 			<li id="moveUpdate"></li>
 		</ul>
 
@@ -34,6 +34,20 @@
 		<p id="player9" class="comboArea" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
 		<p id="playerHand" ondrop="drop(event)" ondragover="allowDrop(event)"></p>
 		<p class="Player">Player</p>
+		<!-- added end div tag -->		
+		</div>
+		
+		
+		<!-- You can change the p to img and add any winning screen you want -->
+
+		<div id="winScreen" style="display:none">
+		<p style="font-size:3em;">You Win</p>
+		</div>
+		
+		<div id="loseScreen" style="display:none">
+		<p style="font-size:3em;">You Lose</p>
+		</div>
+		
 
 
 </body>
@@ -147,8 +161,15 @@ function endTurn() {
 		else {
 			do {
 				drawnCard = playDeck.drawCard();
-				if (drawnCard == null) //if the card is null that means no more cards are availble the game ends //WHEN THIS IF TRIGGERED THE GAME IS OVER NO MORE CARDS
-					console.log("The game is over nobody wins");	
+				if (drawnCard == null){ //if the card is null that means no more cards are availble the game ends //WHEN THIS IF TRIGGERED THE GAME IS OVER NO MORE CARDS
+					console.log("The game is over nobody wins");
+					
+					/*****************Added loosing screen*************
+					***************************************************
+					**************************************************/
+					document.getElementById("gameboard").style.display = "none";
+					document.getElementById("loseScreen").style.display = "initial";
+				}					
 			} while (!cardIsValid(drawnCard) );	
 			document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
 			action = 1;
@@ -168,16 +189,32 @@ function submitMove() {
 			for (var i = 1; i <= 9; i++)
 				if ((document.getElementById("player" + i).hasChildNodes()))
 					counter++;
-			if (counter == 9)//WHEN THIS IF TRIGGERED THE PLAYER HAS WON
+			if (counter == 9){//WHEN THIS IF TRIGGERED THE PLAYER HAS WON
 				console.log("The player has won!");
+				
+				/*****************Added win screen*************
+				***************************************************
+				**************************************************/
+				document.getElementById("gameboard").style.display = "none";
+				document.getElementById("winScreen").style.display = "initial";
+			}
+				
 		}
 		else {
 			var counter2 = 0;
 			for (var i = 1; i <= 9; i++)
 				if (document.getElementById("comp" + i).hasChildNodes())
 					counter2++;
-			if (counter2 == 9)//WHEN THIS IF TRIGGERED THE COMPUTER HAS WON
+			if (counter2 == 9){//WHEN THIS IF TRIGGERED THE COMPUTER HAS WON
 				console.log("The computer has won!");
+				
+				
+				/*****************Added loosing screen*************
+				***************************************************
+				**************************************************/
+				document.getElementById("gameboard").style.display = "none";
+				document.getElementById("loseScreen").style.display = "initial";
+				}
 		}
 		document.getElementById("moveUpdate").innerHTML = "Valid Move!";
 		
