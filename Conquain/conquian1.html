@@ -182,7 +182,7 @@ function endTurn() {
 
 //called when the user presses submit
 function submitMove() {
-	if (validMove(tempComboHolder) || true) {
+	if (validMove(tempComboHolder)) {
 		
 		//checks if the player has won by looking at their board
 		var counter = 1;
@@ -539,4 +539,5 @@ init();
 //verison 0.7
 //TODO LIST: 
 //Make the buttons disable, then enable it
+//change the cards for the opponent to blanks
 </script>
