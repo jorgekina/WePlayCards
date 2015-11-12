@@ -182,13 +182,14 @@ function endTurn() {
 
 //called when the user presses submit
 function submitMove() {
-	if (validMove(tempComboHolder)) {
+	if (validMove(tempComboHolder) || true) {
 		
 		//checks if the player has won by looking at their board
-		var counter = 1;
+		var counter = 0;
 		for (var i = 1; i <= 9; i++)
 		if ((document.getElementById("player" + i).hasChildNodes()))
 			counter++;
+		console.log("counter is " + counter);
 		if (counter == 9){
 			console.log("The player has won!");
 			document.getElementById("gameboard").style.display = "none";
@@ -494,7 +495,7 @@ function computerTurn() {
 				counter++;
 			}
 		}
-		counter = 1;
+		counter = 0;
 		//checks if the board is full which means the computer has won
 		for (var i = 1; i <= 9; i++)
 			if (document.getElementById("comp" + i).hasChildNodes())
