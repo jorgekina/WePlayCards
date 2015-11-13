@@ -22,7 +22,7 @@ if(isset($_POST['btn-login']))
  else
  {
   ?>
-        <script>alert('wrong details');</script>
+        <script>alert('Incorrect username or password');</script>
   <?php
  }
  
