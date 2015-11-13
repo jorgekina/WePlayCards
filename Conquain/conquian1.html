@@ -3,10 +3,10 @@
 <link rel="stylesheet" href="format.css" type="text/css" />
 
 <body>
-	<div id="gameboard" style="background:green; height:1000px;">
+	<div id="gameboard" style="background:green; height:100vh;">
 <title>Conquain</title>
 <body style="background:#D0D0D0 ;">
-	<div id="gameboard">
+	<div id="gameboard" style= "height: 100vh">
 		<ul>
 			<li id="gameState"></li>
 			<li><a href=# class="button" style="color:white;" button onclick="submitMove()">Submit Move</button></a>
@@ -39,7 +39,6 @@
 		<p class="Player">Player</p>
 		</div>
 		
-		
 		<!-- You can change the p to img and add any winning screen you want -->
 
 		<div id="winScreen" style="display:none">
@@ -50,7 +49,6 @@
 		<p style="font-size:3em;">You Lose</p>
 		</div>
 		
-
 
 </body>
 
@@ -118,13 +116,14 @@ var drawHand = function(hand, player) {
 	// a var representation of the players current cards
 	var stringRep = "<img id = 'images/ghostcard.png' src= 'images/ghostcard.png' height = '125' width = '90' draggable='false'>";
 	//prefix added for id of image
-	var prefix;
-	if (player)
-		prefix = "x";
-	else
-		prefix = "y"
-	for (var i = 0; i < hand.length;i++)
-		stringRep += "<img id = '" + prefix + hand[i].getImageSource() + "' src=" + hand[i].getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
+	if (player) {
+		for (var i = 0; i < hand.length;i++)
+			stringRep += "<img id = '" + "x" + hand[i].getImageSource() + "' src=" + hand[i].getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
+	}
+	else {
+		for (var i = 0; i < hand.length; i++)
+			stringRep += "<img id = 'yImages/back.jpeg' src= images/back.jpeg height = '125' width = '90' draggable='false'>"
+	}
 	return stringRep;
 }
 
@@ -182,7 +181,7 @@ function endTurn() {
 
 //called when the user presses submit
 function submitMove() {
-	if (validMove(tempComboHolder) || true) {
+	if (validMove(tempComboHolder)) {
 		
 		//checks if the player has won by looking at their board
 		var counter = 0;
@@ -381,7 +380,7 @@ function drop(ev) {
 						 	
 						 	var strings = document.getElementById("player" + i).childNodes[0].id;
 							string = strings.substring(1,strings.length);
-							document.getElementById("player" + i).childNodes[0].id = "y" + string;//set id to the others						 	
+							document.getElementById("player" + i).removeChild(document.getElementById("player" + i).childNodes[0]);
 						 	for (var x = 0; x < playerHand.length; x++) {
 						 		
 						 		if (playerHand[x].getImageSource().indexOf(string) != -1) {
@@ -398,7 +397,6 @@ function drop(ev) {
 									compPlayer.addCard(cardToDiscard);	
 									playerHand.push(compDiscard);
 									document.getElementById("playerHand").innerHTML = drawHand(playerHand, 1);
-									document.getElementById("computerHand").appendChild(document.getElementById("player" + i).childNodes[0]);
 									document.getElementById("computerHand").innerHTML = drawHand(compPlayer.getDeck(), 0);
 									break;
 						 		}
@@ -477,6 +475,8 @@ function start() {
 function computerTurn() {
 	//the computer will try to make a valid play
 	var result = compPlayer.getValidPlay(drawnCard);
+	if (result != null)
+		console.log(result.toString() + " this is the result from computer");
 	var drawnCardUsed = false;
 	if (result != null) {
 		//update the cards on the board
@@ -490,11 +490,16 @@ function computerTurn() {
 					document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= images/back.jpeg height = '125' width = '90' draggable='false'>";//put an empty image there
 					drawnCardUsed = true;	
 				}
-				else
-					document.getElementById("comp" + i).appendChild(document.getElementById("y" + result[counter].getImageSource()));
+				else {
+					//create the image on the blank space
+					document.getElementById("comp" + i).innerHTML = "<img id = '" + "y"+ result[counter].getImageSource()+ "' src=" + result[counter].getImageSource() + " height = '125' width = '90' draggable='false' ondragstart='drag(event)'>";
+					console.log("Card used " + result[counter].getImageSource());
+				}
 				counter++;
 			}
 		}
+		document.getElementById("computerHand").innerHTML = drawHand(compPlayer.getDeck(), 0);
+			
 		counter = 0;
 		//checks if the board is full which means the computer has won
 		for (var i = 1; i <= 9; i++)
@@ -509,12 +514,11 @@ function computerTurn() {
 		
 		if (drawnCardUsed) {//if the card from the deck was used, it discards a card and moves it to the deck
 			var discardedCard = compPlayer.discardCard();
-			console.log(discardedCard.getImageSource() + "card discarded");
+			console.log(discardedCard.getImageSource() + " card discarded");
 			document.getElementById("cardDrawn").removeChild(document.getElementById("cardDrawn").childNodes[0])
-			document.getElementById("cardDrawn").appendChild(document.getElementById("y" + discardedCard.getImageSource()));
-			document.getElementById("y" + discardedCard.getImageSource()).id = "deck" + discardedCard.getImageSource();
+			document.getElementById("cardDrawn").innerHTML = "<img id = '" + "deck"+ discardedCard.getImageSource()+ "' src=" + discardedCard.getImageSource() + " height = '125' width = '90' draggable='false' ondragstart='drag(event)'>";
 			action = 1;
-			console.log("computer discarded a card");
+			document.getElementById("computerHand").innerHTML = drawHand(compPlayer.getDeck(), 0);
 		}
 	}
 	
@@ -537,8 +541,7 @@ var action = 1;//to specify what will happen in the next turn
 var needToExchange = true;
 init();
 
-//verison 0.7
+//verison 0.8
 //TODO LIST: 
 //Make the buttons disable, then enable it
-//change the cards for the opponent to blanks
 </script>
