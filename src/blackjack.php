@@ -64,31 +64,30 @@ $userRow = mysqli_fetch_array($res);
 	</div>
 	
 	<div id="help" style="display:none; color:white;">
-	<br>
-    <H1>How to play:</H1>
-	<p>The game Blackjack also called 21 is played with a standard deck of 52 cards.
-    <br>
-    <br> The object of the game is to beat the dealer in one of the following ways:
-	<li>Get 21 points on the player's first two cards (called a blackjack), without a dealer blackjack;
-	<li>Reach a final score higher than the dealer without exceeding 21; or
-	<li>Let the dealer draw additional cards until his or her hand exceeds 21.
-    <br>
-	<br>To Draw a card simply press the Hit button and to stop drawing cards press the Stand button.
-	<br>Once you press the Stand button the dealer will make its play and the winner will be announced.
-    <br></br>
-    </p>
-	<button onclick="backToGame()">Back to Game</button>
+        <br>
+        <H1>How to play:</H1>
+        <p>The game Blackjack also called 21 is played with a standard deck of 52 cards.
+        <br>
+        <br> The object of the game is to beat the dealer in one of the following ways:
+        <li>Get 21 points on the player's first two cards (called a blackjack), without a dealer blackjack;
+        <li>Reach a final score higher than the dealer without exceeding 21; or
+        <li>Let the dealer draw additional cards until his or her hand exceeds 21.
+        <br>
+        <br>To Draw a card simply press the Hit button and to stop drawing cards press the Stand button.
+        <br>Once you press the Stand button the dealer will make its play and the winner will be announced.
+        <br></br>
+        </p>
+        <button onclick="backToGame()">Back to Game</button>
+    </div>
 
-	</div>
     <div id ="quit">
-        <button onclick="quit()" style="position:absolute; top:632px; left:0px; ">Quit</button>
+        <button onclick="quit()" style="position:absolute; top:620px; left:0px; ">Quit</button>
 		
-		<button onclick="helpMenu()"style="position:absolute; top:632px; left:100px;">Help</button>
+		<button onclick="helpMenu()"style="position:absolute; top:620px; left: 85px;">Help</button>
 
-        <div id="subMenu" style="display:none; position:absolute; top:615px; left:0px;">
+        <div id="subMenu" style="display:none; position:absolute; top:600px; left:0px;">
             <p style="color:white; text-align:center;">Would you like to quit?</p>
             <a href="index.php"><button onclick="yes()">Yes</button></a>
-
             <button onclick="no()">No</button>
         </div>
     </div>
