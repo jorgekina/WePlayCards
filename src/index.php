@@ -42,11 +42,6 @@ if(isset($_POST['btn-login']))
 </header>
 
 <div id="header">
-    <div id="right">
-        <div id="content">
-        <a href="MainMenu.php" class="padRight">Main Menu</a>
-        </div>
-    </div>
 </div>
 
 <body>
@@ -79,7 +74,6 @@ if(isset($_POST['btn-login']))
     <a href="https://instagram.com/officialbicyclecards/"><img class="imgIcons" src="images/instagramicon.png"></a>
     <a href="https://www.facebook.com/bicyclecards"><img class="imgIcons" src="images/facebook.png"></a>
     <a href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/twittericon.png" </a>
-    <a  href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/youtubeicon.png"</a>
 </footer>
 
 </html>

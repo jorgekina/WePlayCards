@@ -42,8 +42,8 @@ if (isset($_POST['btn-chpass']))
     <div id="right">
         <div id="content">
         <b class="padRight">Hello <?php echo $userRow['email'];?></b>
-        <a class="padRight">Points:<?php echo $userRow['points'];?></a>
-        <a href="MainMenu.php" class="padRight">Main Menu</a>
+        <b class="padRight">Points:<?php echo $userRow['points'];?></b>
+        <a href="MainMenu.php" class="padRight">Home</a>
         <a href="logout.php?logout" class="padRight">Sign Out</a>
         </div>
     </div>
@@ -75,7 +75,6 @@ if (isset($_POST['btn-chpass']))
     <a href="https://instagram.com/officialbicyclecards/"><img class="imgIcons" src="images/instagramicon.png"></a>
     <a href="https://www.facebook.com/bicyclecards"><img class="imgIcons" src="images/facebook.png"></a>
     <a href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/twittericon.png" </a>
-    <a  href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/youtubeicon.png"</a>
 </footer>
 
 </html>
