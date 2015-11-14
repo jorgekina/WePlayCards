@@ -35,7 +35,7 @@ $userRow = mysqli_fetch_array($res);
     <div id="right">
         <div id="content">
             <b class="padRight">Hello <?php echo $userRow['email'];?></b>
-            <a class="padRight">Points:<?php echo $userRow['points'];?></a>
+            <b class="padRight">Points:<?php echo $userRow['points'];?></b>
             <a href="MainMenu.php" class="padRight">Main Menu</a>
             <a href="logout.php?logout" class="padRight">Sign Out</a>
         </div>
@@ -43,40 +43,48 @@ $userRow = mysqli_fetch_array($res);
 </div>
 
 <body>
+
+
+
     <div id="blackjack">
-        <a href=# class="newButton1" button id="deal" onclick="startGame()"  ></button></a>
-        <a href=# class="newButton2" button id="hit" onclick="hitMe()"  ></button></a>
-        <a href=# class="newButton3" button id="stand"  onclick="stop()" ></button></a>
+        <a href=# class="dealButton" button id="deal" onclick="startGame()"  ></button></a>
+        <a href=# class="hitButton" button id="hit" onclick="hitMe()"  ></button></a>
+        <a href=# class="standButton" button id="stand"  onclick="stop()" ></button></a>
         
         <p class = "Player">Dealer</p>
-        <p id ="dealerCards">  <img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"</p>
+        <p id ="dealerCards">  <img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"></p>
             
         <p id="result"></p>
             
         <p class = "Player">Player</p>
         <p id="playerCards"><img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"></p>
+
+
+    <div id ="quit">
+        <button onclick="quit()" style="position:absolute; top:625px; left:0px; ">Quit</button>
+
+        <div id="subMenu" style="display:none; position:absolute; top:517px; left:50px;">
+            <p style="color:white; background-color:black; text-align:center;">Would you like to quit?</p>
+            <a href="index.php"><button onclick="yes()">Yes</button></a>
+
+            <button onclick="no()">No</button>
+        </div>
     </div>
+
+    </div>
+
 </body>
 
 <footer>
-    
+
     <div id="fbox1">SOCIAL
     </div>
 
     <a href="https://instagram.com/officialbicyclecards/"><img class="imgIcons" src="images/instagramicon.png"></a>
     <a href="https://www.facebook.com/bicyclecards"><img class="imgIcons" src="images/facebook.png"></a>
-    <a href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/twittericon.png" </a>
-    <a  href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" /><img  class="imgIcons" src="images/youtubeicon.png"</a>
+    <a href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img  class="imgIcons" src="images/twittericon.png"></a>
+    <a  href="https://twitter.com/bicyclecards?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor" /><img  class="imgIcons" src="images/youtubeicon.png"></a>
 
-
-    <div id ="quit">
-        <button onclick="quit()">quit</button>
-        <div id="subMenu" style="display:none;">
-            <p>Would you like to quit</p>
-            <a href="http://www.facebook.com"><button onclick="yes()">Yes</button></a>
-            <button onclick="no()">No</button>
-        </div>
-    </div>
 
 </footer>
 
@@ -84,11 +92,13 @@ $userRow = mysqli_fetch_array($res);
 <script>
 
 function quit(){
-    document.getElementById("subMenu");
+    document.getElementById("subMenu").style.display = "initial";
 }
 
 function no(){
+    document.getElementById("quit").style.display = "initial";
     document.getElementById("subMenu").style.display = "none";
+
 }
 
 function yes(){
