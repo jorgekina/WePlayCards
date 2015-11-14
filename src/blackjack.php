@@ -61,10 +61,10 @@ $userRow = mysqli_fetch_array($res);
 
 
     <div id ="quit">
-        <button onclick="quit()" style="position:absolute; top:625px; left:0px; ">Quit</button>
+        <button onclick="quit()" style="position:absolute; top:632px; left:0px; ">Quit</button>
 
-        <div id="subMenu" style="display:none; position:absolute; top:517px; left:50px;">
-            <p style="color:white; background-color:black; text-align:center;">Would you like to quit?</p>
+        <div id="subMenu" style="display:none; position:absolute; top:615px; left:0px;">
+            <p style="color:white; text-align:center;">Would you like to quit?</p>
             <a href="index.php"><button onclick="yes()">Yes</button></a>
 
             <button onclick="no()">No</button>

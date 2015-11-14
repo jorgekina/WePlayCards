@@ -13,21 +13,20 @@
 
         button {
             font-size: 10px;
-            width: 100px;
-            height: 40px;
+            width: 95px;
+            height: 30px;
             background-color: black;
             color: white;
-            right: 50px;
-            top: 90px;
             position: relative;
+            left:0px;
         }
-
 
 
         img{
             margin-right:1%;
             margin-left:1%;
         }
+
 
         .Player{
             margin-left:2%;

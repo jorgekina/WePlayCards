@@ -43,13 +43,6 @@ footer{
     padding: 20px;
 }
 
-img.imgIcons {
-    height:40px;
-    width:40px;
-    vertical-align: middle;
-    position:relative;
-    padding-right: 5px;
-}
 
 .conquianGraphic {
     vertical-align: middle;
@@ -95,11 +88,14 @@ img.imgIcons {
 }
 
 
-.quitButton{
-    padding:10px;
-    align:left;
-    top:600px;
-    background: transparent url('images/dealbutton.png') no-repeat;
-    position:absolute;
+img.imgIcons {
+    height:40px;
+    width:40px;
+    vertical-align: middle;
+    position:relative;
+    padding-right: 15px;
+    margin-left:0%;
+    marging-right:0%;
 }
+
 
