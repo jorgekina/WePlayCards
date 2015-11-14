@@ -46,7 +46,9 @@ $userRow = mysqli_fetch_array($res);
 
 
 
-    <div id="blackjack">
+    <div id="blackjack" style="height:400px;">
+	
+	<div id="game">
         <a href=# class="dealButton" button id="deal" onclick="startGame()"  ></button></a>
         <a href=# class="hitButton" button id="hit" onclick="hitMe()"  ></button></a>
         <a href=# class="standButton" button id="stand"  onclick="stop()" ></button></a>
@@ -59,9 +61,23 @@ $userRow = mysqli_fetch_array($res);
         <p class = "Player">Player</p>
         <p id="playerCards"><img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"></p>
 
-
+	</div>
+	
+	<div id="help" style="display:none;">
+	<H1>How to play:</H1>
+	<p>The game Blackjack also called 21 is played with a standard deck of 52 cards. <br> The object of the game is to beat the dealer in one of the following ways:
+	<br>-Get 21 points on the player's first two cards (called a blackjack), without a dealer blackjack;
+	<br>-Reach a final score higher than the dealer without exceeding 21; or
+	<br>-Let the dealer draw additional cards until his or her hand exceeds 21. 
+	<br>To Draw a card simply press the Hit button and to stop drawing cards press the Stand button. 
+	<br>Once you press the Stand button the dealer will make its play and the winner will be announced.</p>
+	<button onclick="backToGame()">Back to Game</button>
+	
+	</div>
     <div id ="quit">
         <button onclick="quit()" style="position:absolute; top:632px; left:0px; ">Quit</button>
+		
+		<button onclick="helpMenu()"style="position:absolute; top:632px; left:100px;">Help</button>
 
         <div id="subMenu" style="display:none; position:absolute; top:615px; left:0px;">
             <p style="color:white; text-align:center;">Would you like to quit?</p>
@@ -90,6 +106,16 @@ $userRow = mysqli_fetch_array($res);
 
 
 <script>
+
+function helpMenu(){
+	document.getElementById("game").style.display = "none";
+	document.getElementById("help").style.display = "initial";
+}
+
+function backToGame(){
+	document.getElementById("game").style.display = "initial";
+	document.getElementById("help").style.display = "none";
+}
 
 function quit(){
     document.getElementById("subMenu").style.display = "initial";
