@@ -28,47 +28,55 @@
         }
 
 
-        .Player{
-            margin-left:2%;
-            font-size: 130%;
-            font-family: Arial;
-            font-weight: regular;
-            color: black;
-            padding-top: 20px;
-            padding-bottom: 10px;
-            //border-bottom-width:2em;
-        }
+    .Dealer{
+        margin-left:20px;
+        font-size: 24px;
+        font-family: Arial;
+        color: black;
+        padding-top: 20px;
+        padding-bottom: 10px;
 
-        #result {
-            margin-left: 15%;
-            top: 415px;
+    }
+
+
+    .Player{
+        margin-left:20px;
+        font-size: 24px;
+        font-family: Arial;
+        color: black;
+        
+    }
+
+    #result {
+        top: 400px;
+            margin-left: 160px;
             font-size: 130%;
             font-family: Arial;
             color: white;
             position: absolute;
         }
         
-        .dealButton {
-            padding:100px;
-            top:250px;
-            right: 1%;
-            background: transparent url('images/dealbutton.png') no-repeat;
-            position:absolute;
-        }
+    .dealButton {
+        padding:100px;
+        top:250px;
+        right: 1%;
+        background: transparent url('images/dealbutton.png') no-repeat;
+        position:absolute;
+    }
 
-        .hitButton {
-            padding:100px;
-            top: 310px;
-            right: 1%;
-            background: transparent url('images/hitbutton.png') no-repeat;
-            position:absolute;
-        }
+    .hitButton {
+        padding:100px;
+        top: 310px;
+        right: 1%;
+        background: transparent url('images/hitbutton.png') no-repeat;
+        position:absolute;
+    }
 
-        .standButton {
-            padding:100px;
-            top: 370px;
-            right: 1%;
-            background: transparent url('images/standbutton.png') no-repeat;
-            position:absolute;
-        }
+    .standButton {
+        padding:100px;
+        top: 370px;
+        right: 1%;
+        background: transparent url('images/standbutton.png') no-repeat;
+        position:absolute;
+    }
 

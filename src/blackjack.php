@@ -20,8 +20,8 @@ $userRow = mysqli_fetch_array($res);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <LINK rel="stylesheet" href="style.css" type="text/css" />
-<LINK REL=StyleSheet HREF="blackjack.css" TYPE="text/css">
-<LINK REL=StyleSheet HREF="main.css" TYPE="text/css">
+<LINK REL=StyleSheet HREF="blackjack.css" TYPE="text/css" />
+<LINK REL=StyleSheet HREF="main.css" TYPE="text/css" />
 
 </head>
 
@@ -46,23 +46,23 @@ $userRow = mysqli_fetch_array($res);
 
 
 
-    <div id="blackjack" style="height:400px; width:100%;">
+    <div id="blackjack" style="height:400px; ">
 	
 	<div id="game">
         <a href=# class="dealButton" button id="deal" onclick="startGame()"  ></button></a>
         <a href=# class="hitButton" button id="hit" onclick="hitMe()"  ></button></a>
         <a href=# class="standButton" button id="stand"  onclick="stop()" ></button></a>
         
-        <p class = "Player">Dealer</p>
+        <p class = "Dealer">Dealer</p>
         <p id ="dealerCards">  <img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"></p>
-            
-        <p id="result"></p>
-            
+
         <p class = "Player">Player</p>
+        <p id="result"></p>
         <p id="playerCards"><img src= "images/Aclubs.png" height = "150" width = "115" style="visibility:hidden;"></p>
 
+
 	</div>
-	
+
 	<div id="help" style="display:none; color:white;">
         <br>
         <H1>How to play:</H1>
@@ -82,9 +82,7 @@ $userRow = mysqli_fetch_array($res);
 
     <div id ="quit">
         <button onclick="quit()" style="position:absolute; top:620px; left:0px; ">Quit</button>
-		
 		<button onclick="helpMenu()"style="position:absolute; top:620px; left: 85px;">Help</button>
-
         <div id="subMenu" style="display:none; position:absolute; top:600px; left:0px;">
             <p style="color:white; text-align:center;">Would you like to quit?</p>
             <a href="index.php"><button onclick="yes()">Yes</button></a>
