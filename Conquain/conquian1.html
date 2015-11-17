@@ -9,8 +9,8 @@
 	<div id="gameboard" style= "height: 100vh">
 		<ul>
 			<li id="gameState"></li>
-			<li><a href=# class="button" style="color:white;" button onclick="submitMove()">Submit Move</button></a>
-			<li><a href=# class="button" style="color:white;" button id="endButton" onclick="endTurn()">End Turn</button></a>
+			<li><a href="#" class="button"  button id = "subButton" onclick="submitMove()" draggable = "false">Submit Move</button></a>
+			<li><a href="#" class="button1"  button id="endButton" onclick="endTurn()" draggable = "false">End Turn</button></a>
 			<li id="moveUpdate"></li>
 		</ul>
 
@@ -133,12 +133,13 @@ function endTurn() {
 	//checks if the user still needs to discard a card
 	if (userDiscaredCard) {
 		document.getElementById("moveUpdate").innerHTML = "";
+		document.getElementById("moveUpdate").style.color = "black";
 		//check cards that dont belong on the players board and return them back to their hand
 		if (whosTurn) {
 			if (tempComboHolder.length > 0) {
 				for (var i = 0; i < tempComboHolder.length; i++)
 					playerHand.push(tempComboHolder[i]);
-				for (var i = 1; i < 9; i++)
+				for (var i = 1; i <= 9; i++)
 					if (document.getElementById("player" + i).hasChildNodes())
 						if (document.getElementById("player" + i).childNodes[0].draggable)
 							document.getElementById("playerHand").appendChild(document.getElementById("player" + i).childNodes[0]);
@@ -155,6 +156,7 @@ function endTurn() {
 				whosTurn = 1;
 				document.getElementById("gameState").innerHTML = "Player's Turn";
 			}
+
 			action = 0;
 		}//user draws a card 
 		else {
@@ -173,8 +175,10 @@ function endTurn() {
 			action = 1;
 		} 
 	}
- 	else
+ 	else {
  		document.getElementById("moveUpdate").innerHTML = "Dicard card first";
+		document.getElementById("moveUpdate").style.color = "red";
+	 }
 	if (!whosTurn)//callls computers turn
 		computerTurn();
 }
@@ -197,7 +201,7 @@ function submitMove() {
 		}
 
 		document.getElementById("moveUpdate").innerHTML = "Valid Move!";
-		
+		document.getElementById("moveUpdate").style.color = "black";
 		//move the images to the left most empty space
 		var container = "player";
 		var userPrefix = "x";
@@ -239,8 +243,10 @@ function submitMove() {
 			canDropAnyCardInDeck = true;
 		}
 	}
-	else
+	else {
 		document.getElementById("moveUpdate").innerHTML = "Invalid Move!";
+		document.getElementById("moveUpdate").style.color = "red";
+	}
 
 }
 
@@ -421,7 +427,7 @@ function drop(ev) {
 function init() {
 	
 	//fills the starting hand for the players
-	
+	var compHand = new Array();
 	for (var i = 0; i < 8;) {
 		var temp = playDeck.drawCard();
 		if (cardIsValid(temp)) {
@@ -448,7 +454,8 @@ function init() {
 	document.getElementById("gameState").innerHTML = "Discard a card";
 	document.getElementById("moveUpdate").innerHTML = "Drop it in empty slot";
 	document.getElementById("cardDrawn").innerHTML =  "<img id = 'deckImages/back.jpeg' src= images/back.jpeg height = '125' width = '90' draggable='false'>";
-	//************************DISABLE THE Submit Move AND End Turn BUTTON HERE*******/
+	document.getElementById("endButton").style.visibility = "hidden";
+	document.getElementById("subButton").style.visibility = "hidden";
 }
 
 //after discarding starts up the game
@@ -465,18 +472,17 @@ function start() {
 		drawnCard = playDeck.drawCard();	
 	} while (!cardIsValid(drawnCard));	
 	document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
+	document.getElementById("endButton").style.visibility = "visible";
+	document.getElementById("subButton").style.visibility = "visible";
 	
 	if (!whosTurn)
-		computerTurn();
-	//************************ENABLE THE Submit Move AND End Turn BUTTON HERE*******/	
+		computerTurn();	
 }
 
 //is called when the computer needs to take a turn
 function computerTurn() {
 	//the computer will try to make a valid play
 	var result = compPlayer.getValidPlay(drawnCard);
-	if (result != null)
-		console.log(result.toString() + " this is the result from computer");
 	var drawnCardUsed = false;
 	if (result != null) {
 		//update the cards on the board
@@ -527,7 +533,6 @@ function computerTurn() {
 }
 //creating variables for game
 var playDeck = new Deck;
-var compHand = new Array();//DELETE THIS
 var playerHand = new Array();
 var tempComboHolder = new Array();//will hold the cards while the player is making a turn
 var compPlayer;//the computer player
@@ -541,7 +546,6 @@ var action = 1;//to specify what will happen in the next turn
 var needToExchange = true;
 init();
 
-//verison 0.8
-//TODO LIST: 
-//Make the buttons disable, then enable it
+//verison 0.85
+//make an end and help menu
 </script>
