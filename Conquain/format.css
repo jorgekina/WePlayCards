@@ -125,7 +125,118 @@ ul{
 
 .comboArea {
 	width:90px;
-	height:160px;
+	height:125px;
 	border:1px solid #001A00;
 	display:inline-block;
 }
+
+/* Add style for gameboard layout */
+
+
+#gameState {
+    position:absolute;
+    left:900px;
+    top:720px;
+    color:yellow;
+}
+
+#moveUpdate {
+    position:absolute;
+    left:900px;
+    top:750px;
+    color:yellow;
+}
+
+#subButton {
+    position:absolute;
+    left:900px;
+    top:250px;
+    font-size:12px;
+    background:#D00000;
+    color:white;
+    width:100px;
+    height:30px;"
+}
+
+#endButton {
+    position:absolute;
+    left:900px;
+    top:290px;
+    font-size:12px;
+    background:#D00000;
+    color:white;
+    width:100px;
+    height:30px;
+}
+
+
+.Player {
+    top:750px;
+    position:absolute;
+    left:-8px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.Computer {
+    top:275px;
+    position:absolute;
+    left:10px;
+    font-size:14px;
+    font-weight:bold;
+    color:white;
+    font-family:arial;
+}
+
+
+#cardDrawn {
+    top:475px;
+    position:absolute;
+    left:900px;
+}
+
+.discardPile {
+    position:absolute;
+    left:910px;
+    top:610px;
+    font-size:10px;
+    color:white;
+    font-weight:bold;
+    font-family:arial;
+}
+
+#quitButton {
+    font-size: 10px;
+    width: 80px;
+    height: 25px;
+    background-color: black;
+    color: white;
+    position: relative;
+}
+
+#helpButton {
+    font-size: 10px;
+    width: 80px;
+    height: 25px;
+    background-color: black;
+    color: white;
+    position: relative;
+}
+
+#subMenu {
+    display: none;
+    position: absolute;
+    color: black;
+    top: 864px;
+    left: 0px;
+}
+
+#boxButton  {
+    color:white;
+    text-align: center;
+    font-size: 10px;
+    width: 80px;
+    height: 25px;
+    background-color: black;
+}
+
