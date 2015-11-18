@@ -41,10 +41,11 @@ $userRow = mysqli_fetch_array($res);
                             
 <body>
 <div id="mainpage">
-        <a href="conquian.html"><img src="images/conquian2.png" class="conquianGraphic" ></a>
+       <center> <a href="conquian.php"><img src="images/conquian2.png" class="conquianGraphic" ></a>
         <a href="blackjack.php"><img src="images/blackjack.png" class="blackjackGraphic"></a><BR>
-        <submit onclick="window.location.href='conquian.html';" class="conquianButton"> <img src="images/playConquian.png"></submit>
+        <submit onclick="window.location.href='conquian.php';" class="conquianButton"> <img src="images/playConquian.png"></submit>
         <submit onclick="window.location.href='blackjack.php';" class="blackjackButton"> <img src="images/playBlackjack.png"></submit>
+        </center>
 </div>
 
 </body>

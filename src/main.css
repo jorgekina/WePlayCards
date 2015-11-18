@@ -45,46 +45,32 @@ footer{
 
 
 .conquianGraphic {
-    vertical-align: middle;
-    padding-top: 50px;
-    padding-bottom: 2%;
-    padding-left: 20%;
-    padding-right: 5%;
     height: 250px;
     width: 250px;
-    position: absolute;
+    padding-top: 60px;
+    padding-right: 70px;
+    padding-bottom: 20px;
 }
 
 .blackjackGraphic {
-    padding-left: 55%;
-    padding-top: 50px;
-    padding-bottom: 2%;
     height: 250px;
     width: 250px;
+    padding-bottom: 20px;
 
 }
 
 .conquianButton {
-    padding-top: 20px;
-    padding-right: 12%;
-    padding-left: 25%;
-   
+    padding-right: 125px;
+
 }
 
 .blackjackButton {
     padding-top: 20px;
-
 }
 
 #mainpage {
-    width: auto;
-    height: auto;
     background-color:#e6e6e6;
-    margin: 0% 0%;
-    padding-left: 20px;
-    padding-bottom: 10%;
-    visibility:visible;
-    overflow: auto;
+    padding-bottom: 90px;
 }
 
 
