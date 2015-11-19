@@ -268,7 +268,7 @@ function hitMe (){
 	
 		var addEle = deck2[Math.floor((Math.random() * (deck2.length-1)) + 1)]; // random card draw?
 		var index = deck2.indexOf(addEle); // check index to delete from deck
-		deck2.splice(index,1 ); // delete card from deck
+		deck2.splice(index,1); // delete card from deck
 		playCards.push(addEle); //add card to dealer
 		document.getElementById("playerCards").innerHTML += "<img src='images/" + playCards[playCards.length - 1].link + ".png' height = '150' width = '115' >";	// display card
 		var value = burst(playCards);
@@ -371,7 +371,7 @@ function dealerPlay(){
 		//dealValue = burst(dealCards);
 		var addEle = deck2[Math.floor((Math.random() * (deck2.length-1)) + 1)] // random card draw?
 		var index = deck2.indexOf(addEle); // check index to delete from deck
-		deck2.splice(index,1 ); // delete card from deck
+		deck2.splice(index,1); // delete card from deck
 		dealCards.push(addEle); //add card to dealer
 		document.getElementById("dealerCards").innerHTML += "<img src='images/" + dealCards[dealCards.length - 1].link + ".png' height = '150' width = '115' >";	// display card
 		dealValue = burst(dealCards);

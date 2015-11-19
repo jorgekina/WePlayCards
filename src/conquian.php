@@ -190,8 +190,16 @@ var validMove = function (move) {
 	for (var i = 0; i < move.length; i++)
 		if (move[i].getValue() === testValue)
 			counter++;
-	if (counter === move.length)
+	if (counter === move.length){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			}
+		}	
+		xhttp.open("GET", "addPoints.php", true);
+		xhttp.send();
 		return true;
+	}
 	counter = 1;
 	var testSuit = move[0].getSuit();
 	//check if the cards are in ascending order and if the suit are the same
@@ -207,8 +215,17 @@ var validMove = function (move) {
 					counter++;
 		}
 	}
-	if (counter === move.length)
+	if (counter === move.length){
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			
+			}
+		}	
+		xhttp.open("GET", "addPoints.php", true);
+		xhttp.send();
 		return true;
+	}
 	return false;
 }
 
@@ -270,6 +287,14 @@ function endTurn() {
 					console.log("The game is over nobody wins");
 					document.getElementById("gameboard").style.display = "none";
 					document.getElementById("loseScreen").style.display = "initial";
+					var xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+					if (xhttp.readyState == 4 && xhttp.status == 200) {
+						//document.getElementById("demo").innerHTML = xhttp.responseText;
+						}
+					}	
+					xhttp.open("GET", "subPoints.php", true);
+					xhttp.send();
 					return;//exit the game
 			}	
 			document.getElementById("cardDrawn").innerHTML =  "<img id = 'deck" + drawnCard.getImageSource() + "'src=" + drawnCard.getImageSource() + " height = '125' width = '90' draggable='true' ondragstart='drag(event)'>";
@@ -298,6 +323,14 @@ function submitMove() {
 			console.log("The player has won!");
 			document.getElementById("gameboard").style.display = "none";
 			document.getElementById("winScreen").style.display = "initial";
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+			if (xhttp.readyState == 4 && xhttp.status == 200) {
+			//document.getElementById("demo").innerHTML = xhttp.responseText;
+			}
+		}	
+		xhttp.open("GET", "addPoints.php", true);
+		xhttp.send();
 			return;
 		}
 
