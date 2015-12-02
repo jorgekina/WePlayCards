@@ -1,4 +1,6 @@
+/* Stylesheet for Blackjack Game */
 
+/* WARNING! The img tag that is a standard and widely used tag has rules set in blackjack.css */
 
         #blackjack {
             width: auto;
@@ -21,7 +23,7 @@
             left:0px;
         }
 
-
+ 
         img{
             margin-right:1%;
             margin-left:1%;
