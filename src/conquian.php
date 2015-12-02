@@ -80,6 +80,7 @@ $userRow = mysqli_fetch_array($res);
 	</div>
 		
 		<!-- You can change the p to img and add any winning screen you want -->
+        <!--Win and Lose messages -->
 
 		<div id="winScreen" style="display:none">
 		<p style="font-size:3em; color:white; text-align:center;"><BR><BR>You Win!<BR><BR><BR><BR></p>
