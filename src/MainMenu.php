@@ -1,21 +1,22 @@
 <?php
+//starts the php session
 session_start();
 include_once 'dbconnect.php';
-
+//attach the header to the mainpage
 if (!isset($_SESSION['user']))
 {
  header("Location: index.php");
 }
-
+//selects the user row from the database
 $res = mysqli_query($connection, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
 $userRow = mysqli_fetch_array($res);
 
 ?>
 
 
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html> <!--defines the document type-->
+<html><!--starts the html code-->
+<head><!--it contains information about the document-->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="style.css" type="text/css" />
 <link rel="stylesheet" href="main.css" type="text/css" />
@@ -38,18 +39,22 @@ $userRow = mysqli_fetch_array($res);
 </div>
 
 
-                            
+ <!--lists buttons in the body of the webpage-->                           
 <body>
+<!--keyword div defines the section of the document-->
 <div id="mainpage">
+
        <center> <a href="conquian.php"><img src="images/conquian2.png" class="conquianGraphic" ></a>
         <a href="blackjack.php"><img src="images/blackjack.png" class="blackjackGraphic"></a><BR>
+        <!--clicking the conquain button takes the user to the new page containing the conquain game-->
         <submit onclick="window.location.href='conquian.php';" class="conquianButton"> <img src="images/playConquian.png"></submit>
+                <!--clicking blackjackButton button takes the user to the new page containing the blackjack game-->
         <submit onclick="window.location.href='blackjack.php';" class="blackjackButton"> <img src="images/playBlackjack.png"></submit>
         </center>
 </div>
 
 </body>
-                            
+<--links to the facebook and twitter at the bottom of the main page-->                     
 <footer>
     <div id="fbox1"> SOCIAL </div>
     <a href="https://instagram.com/officialbicyclecards/"><img class="imgIcons" src="images/instagramicon.png"></a>
