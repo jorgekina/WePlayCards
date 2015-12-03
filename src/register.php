@@ -1,16 +1,22 @@
 <?php
+    //start current php session
 session_start();
+
+//redirect to home.php if user is not logged in
 if(isset($_SESSION['user'])!="")
 {
  header("Location: home.php");
 }
 include_once 'dbconnect.php';
 
+//if user clicked on sign up button...
 if(isset($_POST['btn-signup']))
 {
+    //returns the email and password
  $email = mysqli_real_escape_string($connection, $_POST['email']);
  $upass = mysqli_real_escape_string($connection, $_POST['pass']);
  
+ //check to see if successfully registered and show appropriate message
  if(mysqli_query($connection, "INSERT INTO users(email,password) VALUES('$email','$upass')"))
  {
   ?>

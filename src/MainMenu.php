@@ -1,12 +1,15 @@
 <?php
+    //start current php session and attempt to connect to db only once
 session_start();
 include_once 'dbconnect.php';
 
+//redirect to index.php if user is not logged in
 if (!isset($_SESSION['user']))
 {
  header("Location: index.php");
 }
 
+//returns the row matching the user id
 $res = mysqli_query($connection, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
 $userRow = mysqli_fetch_array($res);
 

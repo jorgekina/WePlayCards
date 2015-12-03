@@ -1,19 +1,24 @@
 <?php
+    //start php session and attempt to connect to the database once
 session_start();
 include_once 'dbconnect.php';
 
+//redirects to changepass.php if user session is not set
 if(!isset($_SESSION['user']))
 {
  header("Location: changepass.php");
 }
 
+//returns the row matching user id
 $res = mysqli_query($connection, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
 $userRow = mysqli_fetch_array($res);
 
+//check if user pressed the change password button...
 if (isset($_POST['btn-chpass']))
 {   //used to create legal sql string
     $newPassword = mysqli_real_escape_string($connection, $_POST['newPass']);
 
+    //display appropriate message depending on whether changing password succeeds or not
     if (mysqli_query($connection, "UPDATE `WPCDB`.`users` SET password='$newPassword' WHERE user_id=".$_SESSION['user']))
     {
         ?><script>alert('Password changed successfully.');</script><?php

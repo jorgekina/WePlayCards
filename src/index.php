@@ -1,19 +1,24 @@
 <?php
+    //start php session and attempt to connect to db only once
 session_start();
 include_once 'dbconnect.php';
 
+//redirect to main menu if user is not logged inn
 if(isset($_SESSION['user']) != "")
 {
  header("Location: MainMenu.php");
 }
 
+//if user clicked on sign-in button...
 if(isset($_POST['btn-login']))
 {
+    //returns the email and password from the database
  $email = mysqli_real_escape_string($connection, $_POST['email']);
  $upass = mysqli_real_escape_string($connection, $_POST['pass']);
  $res = mysqli_query($connection, "SELECT * FROM users WHERE email='$email'");
  $row = mysqli_fetch_array($res);
 
+ //check the password
  if($row['password'] == $upass)
  {
   $_SESSION['user'] = $row['user_id'];

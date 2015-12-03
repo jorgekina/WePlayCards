@@ -1,15 +1,19 @@
 <?php
+//starts the current php session and connect to the datase only once
 session_start();
 include_once 'dbconnect.php';
 
+//returns a row from the database matching the user id
 $res = mysqli_query($connection, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
 $userRow = mysqli_fetch_array($res);
 
+//if change email button is pressed...
 if (isset($_POST['btn-chmail']))
 {  
     //used to create legal sql string
     $newEmailAddress = mysqli_real_escape_string($connection, $_POST['newEmail']);
 
+    //show appropriate messages if change email succeeds or fails
     if (mysqli_query($connection, "UPDATE `WPCDB`.`users` SET email='$newEmailAddress' WHERE user_id=".$_SESSION['user']))
     {
         ?><script>alert('Email changed successfully.');</script><?php
