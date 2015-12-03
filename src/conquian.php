@@ -82,11 +82,11 @@ $userRow = mysqli_fetch_array($res);
 		<!-- You can change the p to img and add any winning screen you want -->
 
 		<div id="winScreen" style="display:none">
-		<p style="font-size:3em;">You Win</p>
+		<p style="font-size:3em; color:white; text-align:center;"><BR><BR>You Win!<BR><BR><BR><BR></p>
 		</div>
 		
 		<div id="loseScreen" style="display:none">
-		<p style="font-size:3em;">You Lose</p>
+		<p style="font-size:3em; color:white; text-align:center;"><BR><BR>You Lose!<BR><BR><BR><BR></p>
 		</div>
 
         <!-- Help and Quit Buttons -->
