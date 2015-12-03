@@ -1,26 +1,21 @@
 <?php
-<<<<<<< HEAD
     //start current php session and attempt to connect to db only once
 session_start();
 include_once 'dbconnect.php';
 
 //redirect to index.php if user is not logged in
-=======
 //starts the php session
 session_start();
 include_once 'dbconnect.php';
 //attach the header to the mainpage
->>>>>>> origin/master
+
 if (!isset($_SESSION['user']))
 {
  header("Location: index.php");
 }
-<<<<<<< HEAD
 
 //returns the row matching the user id
-=======
 //selects the user row from the database
->>>>>>> origin/master
 $res = mysqli_query($connection, "SELECT * FROM users WHERE user_id=".$_SESSION['user']);
 $userRow = mysqli_fetch_array($res);
 
