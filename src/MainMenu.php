@@ -54,7 +54,7 @@ $userRow = mysqli_fetch_array($res);
 </div>
 
 </body>
-<--links to the facebook and twitter at the bottom of the main page-->                     
+<!--links to the facebook and twitter at the bottom of the main page-->                     
 <footer>
     <div id="fbox1"> SOCIAL </div>
     <a href="https://instagram.com/officialbicyclecards/"><img class="imgIcons" src="images/instagramicon.png"></a>
