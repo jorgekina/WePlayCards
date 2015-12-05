@@ -681,5 +681,4 @@ var needToExchange = true;
 init();
 
 //verison 0.85
-//make an end and help menu
 </script>
